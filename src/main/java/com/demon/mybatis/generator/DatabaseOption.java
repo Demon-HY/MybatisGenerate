@@ -1,23 +1,15 @@
 package com.demon.mybatis.generator;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.demon.mybatis.generator.model.Column;
 import com.demon.mybatis.generator.model.Database;
 import com.demon.mybatis.generator.model.Table;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 数据库信息获得操作类
- *
- * @ClassName: DatabaseInfoOp
- * @author Andrew.Wen
- * @date 2013-1-10 下午3:56:23
  */
 public class DatabaseOption {
 

@@ -5,11 +5,11 @@ import com.control.situation.entity.${table.className}Info;
 import java.util.List;
 
 /**
-* 数据库层封装
-*
-* @author ${author}
-* @since 1.0
-*/
+ * 数据库层封装
+ *
+ * @author ${author}
+ * @since 1.0
+ */
 public interface ${table.className}Dao {
 
 	${table.className}Info findOne(Long id);

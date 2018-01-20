@@ -1,8 +1,8 @@
 package com.control.situation.api.impl;
 
-import com.control.situation.api.${table.classNameFirstLower}Api;
+import com.control.situation.api.${table.className}Api;
 import com.control.situation.config.Env;
-import com.control.situation.dao.${table.classNameFirstLower}Dao;
+import com.control.situation.dao.${table.className}Dao;
 import com.control.situation.utils.ClientResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

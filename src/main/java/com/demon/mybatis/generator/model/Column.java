@@ -4,10 +4,6 @@ import com.demon.mybatis.generator.StringUtils;
 
 /**
  * 列信息实体
- *
- * @ClassName: ColumnBean
- * @author AndrewWen
- * @date 2013-1-14 下午5:01:03
  */
 public class Column {
 
