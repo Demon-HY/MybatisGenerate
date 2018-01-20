@@ -1,0 +1,47 @@
+package com.control.situation.dao.impl;
+
+import com.control.situation.dao.${table.className}Dao;
+import com.control.situation.entity.${table.className}Info;
+import com.control.situation.mapper.${table.className}Mapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ${table.className}DaoImpl implements ${table.className}Dao {
+
+	@Autowired
+	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+
+	@Override
+	public ${table.className}Info findOne(Long id) {
+		return ${table.classNameFirstLower}Mapper.findOne(id);
+	}
+
+	@Override
+	public List<${table.className}Info> findAll() {
+	    return ${table.classNameFirstLower}Mapper.findAll();
+    }
+
+    @Override
+    public List<${table.className}Info> findByParams(${table.className}Info ${table.classNameFirstLower}) {
+		return ${table.classNameFirstLower}Mapper.findByParams(${table.classNameFirstLower});
+	}
+
+	@Override
+	public int delete(Long id) {
+		return ${table.classNameFirstLower}Mapper.delete(id);
+	}
+
+	@Override
+	public int insert(${table.className}Info ${table.classNameFirstLower}) {
+		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
+	}
+
+	@Override
+	public int update(${table.className}Info ${table.classNameFirstLower}) {
+		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
+	}
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${table.packageName}.mapper.${table.className}Mapper">
+    <resultMap id="${table.className}ResultMap" type="${table.packageName}.entity.${table.className}Info">
+#foreach($tempColumn in $table.columnList)
+    #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
+	<id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+    #else<result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+    #end
+#end</resultMap>
+
+    <sql id="Base_Column_List">
+	#foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
+
+    </sql>
+
+    <select id="findOne" parameterType="java.lang.Integer" resultMap="${table.className}ResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${table.tableName}
+        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
+    </select>
+
+    <select id="findAll"  resultMap="${table.className}ResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${table.tableName}
+    </select>
+
+    <select id="findByParams" resultMap="${table.className}ResultMap" parameterType="${table.className}Info">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${table.tableName}
+        <where>
+    #foreach($tempColumn in $table.columnList)
+
+	        <if test="${tempColumn.columnName} != null" >
+			    ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
+	        </if>
+    #end    </where>
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM ${table.tableName}
+        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${tempColumn.columnType}}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
+        INSERT INTO
+        ${table.tableName} (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end#end)
+        values
+        (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}#if($velocityCount!=$table.columnList.size()),#end#end#end)
+    </insert>
+
+    <update id="update" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
+        UPDATE ${table.tableName}
+        <set>
+	    #foreach($tempColumn in $table.columnList)
+	        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+
+            <if test="${tempColumn.fieldName} != null">
+                ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
+            </if>
+	        #end
+	    #end
+
+        </set>
+        WHERE ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
+    </update>
+</mapper>

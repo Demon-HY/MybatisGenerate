@@ -1,0 +1,39 @@
+##实体类代码
+package ${table.packageName}.entity;
+
+import java.io.Serializable;
+
+/**
+ * ${table.className} 实体类
+ *
+ * @author ${author}
+ * @since 1.0
+ */
+public class ${table.className}Info  implements Serializable {
+
+    private static final long serialVersionUID = -1L;
+
+#foreach( $tempColumn in $table.columnList)
+    #if(${tempColumn.columnComment.trim()} != '')
+    // ${tempColumn.columnComment.trim()}
+    #end
+    #if(${tempColumn.fieldType}=="Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    #end
+private ${tempColumn.fieldType} ${tempColumn.fieldName};
+
+#end
+    public ${table.className}Info(){}
+
+#foreach( $tempColumn in $table.columnList )
+    public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
+        return ${tempColumn.fieldName};
+    }
+
+    public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.fieldName}) {
+        this.${tempColumn.fieldName} = ${tempColumn.fieldName};
+    }
+
+#end
+}
