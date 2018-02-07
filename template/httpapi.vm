@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/${table.tableName}/api")
+@RequestMapping("/${table.classNameFirstLower}/api")
 public class ${table.className}HttpApi {
 
 	private Logger logger = Logger.getLogger(${table.className}HttpApi.class);

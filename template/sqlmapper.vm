@@ -42,7 +42,7 @@
 
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE FROM ${table.tableName}
-        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${tempColumn.columnType}}
+        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
