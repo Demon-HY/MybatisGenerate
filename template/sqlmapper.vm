@@ -3,14 +3,17 @@
 <mapper namespace="${table.packageName}.mapper.${table.className}Mapper">
     <resultMap id="${table.className}ResultMap" type="${table.packageName}.entity.${table.className}Info">
 #foreach($tempColumn in $table.columnList)
-    #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
-	<id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
-    #else<result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
-    #end
-#end</resultMap>
+	#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
+
+        <id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+	#else<result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+	#end
+#end
+
+    </resultMap>
 
     <sql id="Base_Column_List">
-	#foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
+		#foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
 
     </sql>
 
@@ -27,17 +30,19 @@
         FROM ${table.tableName}
     </select>
 
-    <select id="findByParams" resultMap="${table.className}ResultMap" parameterType="${table.className}Info">
+    <select id="findByParams" resultMap="${table.className}ResultMap" parameterType="${table.packageName}.entity.${table.className}Info">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.tableName}
         <where>
-    #foreach($tempColumn in $table.columnList)
+		#foreach($tempColumn in $table.columnList)
 
-	        <if test="${tempColumn.columnName} != null" >
-			    ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
-	        </if>
-    #end    </where>
+            <if test="${tempColumn.fieldName} != null" >
+				and ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}
+            </if>
+		#end
+
+        </where>
     </select>
 
     <delete id="delete" parameterType="java.lang.Integer">
@@ -45,24 +50,44 @@
         WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </delete>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.entity.${table.className}Info">
         INSERT INTO
-        ${table.tableName} (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end#end)
-        values
-        (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}#if($velocityCount!=$table.columnList.size()),#end#end#end)
-    </insert>
-
-    <update id="update" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
-        UPDATE ${table.tableName}
-        <set>
-	    #foreach($tempColumn in $table.columnList)
-	        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+		${table.tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+			#foreach($tempColumn in $table.columnList)
+			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
             <if test="${tempColumn.fieldName} != null">
-                ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
+		    ${tempColumn.columnName},
             </if>
+			    #end
+		    #end
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+	        #foreach($tempColumn in $table.columnList)
+		        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+
+            <if test="${tempColumn.fieldName} != null">
+                #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
+            </if>
+		        #end
 	        #end
-	    #end
+
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="${table.packageName}.entity.${table.className}Info">
+        UPDATE ${table.tableName}
+        <set>
+	#foreach($tempColumn in $table.columnList)
+		#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+
+            <if test="${tempColumn.fieldName} != null">
+				${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
+            </if>
+		#end
+	#end
 
         </set>
         WHERE ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
