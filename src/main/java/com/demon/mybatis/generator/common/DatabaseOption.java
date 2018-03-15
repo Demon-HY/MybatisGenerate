@@ -1,4 +1,4 @@
-package com.demon.mybatis.generator;
+package com.demon.mybatis.generator.common;
 
 import com.demon.mybatis.generator.model.Column;
 import com.demon.mybatis.generator.model.Database;

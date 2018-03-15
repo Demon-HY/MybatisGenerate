@@ -17,6 +17,9 @@ import org.apache.velocity.app.VelocityEngine;
  */
 public class TemplateOption {
 
+    // 默认生成模板为 mybatis 模板
+    static String templatePath = "template";
+
     /**
      * 模板文件生成类
      * @param templateFile 模板文件名
@@ -24,13 +27,14 @@ public class TemplateOption {
      * @param path 要保存的文件路径
      * @param fileName 生成的文件名
      */
-    public static void generatorCode(String templateFile, Map<String, Object> contextMap, String path, String fileName) {
+    public static void generatorCode(String templateFile, Map<String, Object> contextMap, String path,
+                                     String fileName) {
         //设置模板载入路径
         VelocityContext context = new VelocityContext();
         //获取模板引擎
         VelocityEngine ve = new VelocityEngine();
         //模板文件所在的路径
-        String vPath = System.getProperty("user.dir") + "\\template";
+        String vPath = System.getProperty("user.dir") + "\\" + templatePath;
         //设置参数
         ve.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, vPath);
         //处理中文问题

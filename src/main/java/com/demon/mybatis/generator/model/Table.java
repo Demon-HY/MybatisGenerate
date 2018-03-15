@@ -3,7 +3,7 @@ package com.demon.mybatis.generator.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.demon.mybatis.generator.CodeGenerator;
+import com.demon.mybatis.generator.mybatis.MybatisCodeGenerator;
 import com.demon.mybatis.generator.StringUtils;
 
 public class Table {
@@ -71,14 +71,14 @@ public class Table {
      * @return
      */
     public String getClassName() {
-        if (CodeGenerator.prefix.equals("")) {
+        if (MybatisCodeGenerator.prefix.equals("")) {
             // 直接输出
             this.className = StringUtils.getClassUpper(StringUtils
                     .getDomainColumnName(this.tableName));
         } else {
             // 去除前缀
-            if (this.tableName.startsWith(CodeGenerator.prefix)) {
-                int pos = this.tableName.indexOf(CodeGenerator.prefix) + CodeGenerator.prefix.length();
+            if (this.tableName.startsWith(MybatisCodeGenerator.prefix)) {
+                int pos = this.tableName.indexOf(MybatisCodeGenerator.prefix) + MybatisCodeGenerator.prefix.length();
                 this.className = StringUtils.getClassUpper(StringUtils.getDomainColumnName(this.tableName.substring(pos, this.tableName.length())));
             } else if (this.tableName.contains("_")) {
                 this.className = StringUtils.getClassUpper(StringUtils

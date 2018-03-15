@@ -1,4 +1,4 @@
-package com.demon.mybatis.generator;
+package com.demon.mybatis.generator.common;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

@@ -1,4 +1,4 @@
-package com.demon.mybatis.generator;
+package com.demon.mybatis.generator.mybatis;
 
 import java.io.File;
 import java.util.Arrays;
@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.demon.mybatis.generator.TemplateOption;
+import com.demon.mybatis.generator.common.DatabaseOption;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import com.demon.mybatis.generator.model.Database;
@@ -14,9 +16,9 @@ import com.demon.mybatis.generator.model.Table;
 /**
  * 代码生成类
  */
-public class CodeGenerator {
+public class MybatisCodeGenerator {
 
-    private Logger logger = Logger.getLogger(CodeGenerator.class);
+    private Logger logger = Logger.getLogger(MybatisCodeGenerator.class);
 
     //是否去掉模块前面的编号
     public static String prefix = "";
