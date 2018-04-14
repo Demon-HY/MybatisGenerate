@@ -2,7 +2,6 @@ package com.demon.mybatis.generator;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Types;
 import java.util.Objects;
@@ -92,28 +91,28 @@ public class StringUtils {
         String colType = "";
 
         switch (databaseType) {
-            case java.sql.Types.DECIMAL:
-            case java.sql.Types.REAL:
+            case Types.DECIMAL:
+            case Types.REAL:
                 colType = "Double";
                 break;
-            case java.sql.Types.INTEGER:
-            case java.sql.Types.BIGINT:
-            case java.sql.Types.TINYINT:
-            case java.sql.Types.SMALLINT:
+            case Types.BIGINT:
+                colType = "Long";
+                break;
+            case Types.INTEGER:
+            case Types.TINYINT:
+            case Types.SMALLINT:
+            case Types.BIT:
                 colType = "Integer";
                 break;
-            case java.sql.Types.VARCHAR:
-            case java.sql.Types.CHAR:
-            case java.sql.Types.LONGVARBINARY:
-            case java.sql.Types.LONGVARCHAR:
+            case Types.VARCHAR:
+            case Types.CHAR:
+            case Types.LONGVARBINARY:
+            case Types.LONGVARCHAR:
                 colType = "String";
                 break;
-            case java.sql.Types.DATE:
-            case java.sql.Types.TIMESTAMP:
+            case Types.DATE:
+            case Types.TIMESTAMP:
                 colType="Date";
-                break;
-            case Types.BIT:
-                colType="Boolean";
                 break;
             default:
                 System.out.println("找不到数据类型："+databaseType);
@@ -125,29 +124,29 @@ public class StringUtils {
 
     public static String getColumnType(int databaseType) {
         switch (databaseType) {
-            case java.sql.Types.DECIMAL:
+            case Types.DECIMAL:
                 return "DECIMAL";
-            case java.sql.Types.REAL:
+            case Types.REAL:
                 return "REAL";
-            case java.sql.Types.INTEGER:
+            case Types.INTEGER:
                 return "INTEGER";
-            case java.sql.Types.BIGINT:
+            case Types.BIGINT:
                 return "BIGINT";
-            case java.sql.Types.TINYINT:
+            case Types.TINYINT:
                 return "TINYINT";
-            case java.sql.Types.SMALLINT:
+            case Types.SMALLINT:
                 return "SMALLINT";
-            case java.sql.Types.VARCHAR:
+            case Types.VARCHAR:
                 return "VARCHAR";
-            case java.sql.Types.CHAR:
+            case Types.CHAR:
                 return "CHAR";
-            case java.sql.Types.LONGVARBINARY:
+            case Types.LONGVARBINARY:
                 return "LONGVARBINARY";
-            case java.sql.Types.LONGVARCHAR:
+            case Types.LONGVARCHAR:
                 return "LONGVARCHAR";
-            case java.sql.Types.DATE:
+            case Types.DATE:
                 return "DATE";
-            case java.sql.Types.TIMESTAMP:
+            case Types.TIMESTAMP:
                 return "TIMESTAMP";
             case Types.BIT:
                 return "BIT";

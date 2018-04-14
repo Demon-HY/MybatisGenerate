@@ -25,26 +25,26 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
 
 	@Override
 	public ClientResult findList(Env env) {
-	return null;
+		return null;
 	}
 
 	@Override
 	public ClientResult update(Env env) {
-	return null;
+		return null;
 	}
 
 	@Override
 	public ClientResult delete(Env env) {
-	return null;
+		return null;
 	}
 
 	@Override
 	public ClientResult save(Env env) {
-	return null;
+		return null;
 	}
 
 	@Override
 	public ClientResult findDetail(Env env) {
-	return null;
+		return null;
 	}
 }

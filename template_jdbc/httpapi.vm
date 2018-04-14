@@ -28,35 +28,30 @@ public class ${table.className}HttpApi {
 	@RequestMapping("findList")
 	public ClientResult findList(HttpServletRequest req) {
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.findList(env);
-		return clientResult;
+		return ${table.classNameFirstLower}Api.findList(env);
 	}
 
 	@RequestMapping("findDetail")
 	public ClientResult findDetail(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.findDetail(env);
-		return clientResult;
+		return ${table.classNameFirstLower}Api.findDetail(env);
 	}
 
 	@RequestMapping("save")
 	public ClientResult save(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.save(env);
-		return clientResult;
+		return ${table.classNameFirstLower}Api.save(env);
 	}
 
 	@RequestMapping("delete")
 	public ClientResult delete(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.delete(env);
-		return clientResult;
+		return ${table.classNameFirstLower}Api.delete(env);
 	}
 
 	@RequestMapping("update")
 	public ClientResult update(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.update(env);
-		return clientResult;
+		return ${table.classNameFirstLower}Api.update(env);
 	}
 }

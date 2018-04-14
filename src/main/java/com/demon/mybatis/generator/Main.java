@@ -30,11 +30,11 @@ public class Main {
                 "com.mysql.jdbc.Driver",
                 "jdbc:mysql://127.0.0.1:3306/control_situation?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
                 "root",
-                "123456",
+                "P@ssw0rd",
                 "com.control.situation",
                 "Demon-Coffee",
                 "",
-                "f:/code/generator_jdbc"
+                "f:/generator_jdbc"
         );
     }
 }
