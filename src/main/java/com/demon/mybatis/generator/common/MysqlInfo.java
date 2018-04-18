@@ -13,9 +13,13 @@ public class MysqlInfo {
 	public static void main(String[] args) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url = "jdbc:mysql://localhost:3306/test";
-			String user = "root";
-			String pass = "123456";
+//			String url = "jdbc:mysql://localhost:3306/test";
+//			String user = "root";
+//			String pass = "123456";
+			String url = "jdbc:mysql://xb-test-ext-www-copy0901.mysql.rds.aliyuncs.com:3306/xubei";
+			String user = "java_www";
+			String pass = "4NOV5TiVRWXm";
+
 			String s;
 			Connection con = DriverManager.getConnection(url, user, pass);
 			DatabaseMetaData dbmd = con.getMetaData();

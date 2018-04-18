@@ -9,9 +9,24 @@ import com.demon.mybatis.generator.mybatis.MybatisCodeGenerator;
 public class Main {
 
     public static void main(String[] args) {
-//        // 生成 mybatis
-//        MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
-//        mybatisCode.generator(
+        // 生成 mybatis
+        MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
+        mybatisCode.generator(
+                "com.mysql.jdbc.Driver",
+                "jdbc:mysql://xb-test-ext-www-copy0901.mysql.rds.aliyuncs.com:3306/xubei?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
+                "java_www",
+                "4NOV5TiVRWXm",
+                "com.xqiapp",
+                "Demon-Coffee",
+                "task_failover",
+                "f:/code/generator"
+                );
+
+//        // 生成 jdbc
+//        // 设置模本路径
+//        TemplateOption.templatePath = "template_jdbc";
+//        JdbcCodeGenerator jdbcCode = new JdbcCodeGenerator();
+//        jdbcCode.generator(
 //                "com.mysql.jdbc.Driver",
 //                "jdbc:mysql://127.0.0.1:3306/control_situation?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
 //                "root",
@@ -22,19 +37,5 @@ public class Main {
 //                "f:/code/generator"
 //                );
 
-        // 生成 jdbc
-        // 设置模本路径
-        TemplateOption.templatePath = "template_jdbc";
-        JdbcCodeGenerator jdbcCode = new JdbcCodeGenerator();
-        jdbcCode.generator(
-                "com.mysql.jdbc.Driver",
-                "jdbc:mysql://127.0.0.1:3306/control_situation?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
-                "root",
-                "P@ssw0rd",
-                "com.control.situation",
-                "Demon-Coffee",
-                "",
-                "f:/generator_jdbc"
-        );
     }
 }
