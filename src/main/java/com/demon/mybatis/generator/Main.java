@@ -13,13 +13,13 @@ public class Main {
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
         mybatisCode.generator(
                 "com.mysql.jdbc.Driver",
-                "jdbc:mysql://xb-test-ext-www-copy0901.mysql.rds.aliyuncs.com:3306/xubei?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
-                "java_www",
-                "4NOV5TiVRWXm",
-                "com.xqiapp",
-                "Demon-Coffee",
-                "task_failover",
-                "f:/code/generator"
+                "",
+                "",
+                "",
+                "p",
+                "",
+                "",
+                ""
                 );
 
 //        // 生成 jdbc
