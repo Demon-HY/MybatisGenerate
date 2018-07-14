@@ -1,8 +1,5 @@
 ##实体类代码
-package ${table.packageName}.entity;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+package org.demon.sdk.entity.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -15,27 +12,21 @@ import java.util.Date;
  * @since 1.0
  */
 @Table(name = "${table.tableName}")
-public class ${table.className}Info implements Serializable {
-
-	private static final long serialVersionUID = -1L;
+public class ${table.className} implements Serializable {
 
 #foreach( $tempColumn in $table.columnList)
 #if(${tempColumn.columnComment.trim()} != '')
 	// ${tempColumn.columnComment.trim()}
 #end
-#if(${tempColumn.fieldType}=="Date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-#end
 #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
 	@Id
 #end
 	@Column(name = "${tempColumn.columnName}")
-	private ${tempColumn.fieldType} ${tempColumn.fieldName};
+	public ${tempColumn.fieldType} ${tempColumn.fieldName};
 
 #end
 
-	public ${table.className}Info(){}
+	public ${table.className}(){}
 
 #foreach( $tempColumn in $table.columnList )
 	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {

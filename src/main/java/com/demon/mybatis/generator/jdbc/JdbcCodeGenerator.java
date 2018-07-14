@@ -77,22 +77,22 @@ public class JdbcCodeGenerator {
 
                 TemplateOption.generatorCode(
                         "api.vm", map, sourcePath + table.getPackagePath() + "/api",
-                        table.getClassName() + "Api.java");
+                        "I" + table.getClassName() + "Api.java");
 	            TemplateOption.generatorCode(
 			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
-			            table.getClassName() + "ApiImpl.java");
-	            TemplateOption.generatorCode(
-			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
-			            table.getClassName() + "Dao.java");
+			            table.getClassName() + "Api.java");
+//	            TemplateOption.generatorCode(
+//			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
+//			            table.getClassName() + "Dao.java");
 	            TemplateOption.generatorCode(
 			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
 			            table.getClassName() + "DaoImpl.java");
 	            TemplateOption.generatorCode(
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
-			            table.getClassName() + "Info.java");
-	            TemplateOption.generatorCode(
-			            "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
-			            table.getClassName() + "HttpApi.java");
+			            table.getClassName() + ".java");
+//	            TemplateOption.generatorCode(
+//			            "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
+//			            table.getClassName() + "HttpApi.java");
 
                 logger.info("生成表：" + table.getTableName() + "成功");
             }

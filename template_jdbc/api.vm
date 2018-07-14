@@ -1,23 +1,11 @@
-package com.control.situation.api;
+package org.demon.sdk.inner;
 
-import com.control.situation.config.Env;
-import com.control.situation.utils.ClientResult;
+import org.demon.sdk.environment.Env;
 
 /**
  * 内部模块访问接口
  *
  * @author ${author}
- * @since 1.0
  */
-public interface ${table.className}Api {
-
-	ClientResult findList(Env env);
-
-	ClientResult update(Env env);
-
-	ClientResult delete(Env env);
-
-	ClientResult save(Env env);
-
-	ClientResult findDetail(Env env);
+public interface I${table.className}Api {
 }
