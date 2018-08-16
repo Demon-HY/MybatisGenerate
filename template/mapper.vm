@@ -1,20 +1,18 @@
-package com.control.situation.mapper;
+package ${table.packageName}.mapper;
 
-import com.control.situation.entity.${table.className}Info;
+import ${table.packageName}.model.entity.${table.className};
 
 import java.util.List;
 
 public interface ${table.className}Mapper {
 
-	${table.className}Info findOne(Long id);
+	${table.className} findOne(Long id);
 
-	List<${table.className}Info> findAll();
-
-	List<${table.className}Info> findByParams(${table.className}Info ${table.classNameFirstLower});
+	List<${table.className}> findByParams(${table.className} ${table.classNameFirstLower});
 
 	int delete(Long id);
 
-	int insert(${table.className}Info ${table.classNameFirstLower});
+	int insert(${table.className} ${table.classNameFirstLower});
 
-	int update(${table.className}Info record);
+	int update(${table.className} record);
 }

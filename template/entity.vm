@@ -1,8 +1,9 @@
 ##实体类代码
-package ${table.packageName}.entity;
+package ${table.packageName}.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,32 +14,30 @@ import java.util.Date;
  * @author ${author}
  * @since 1.0
  */
-public class ${table.className}Info implements Serializable {
+@Data
+@ApiModel("${table.className} 实体类")
+public class ${table.className} implements Serializable {
 
 	private static final long serialVersionUID = -1L;
 
 #foreach( $tempColumn in $table.columnList)
 #if(${tempColumn.columnComment.trim()} != '')
-	// ${tempColumn.columnComment.trim()}
-#end
-#if(${tempColumn.fieldType}=="Date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@ApiModelProperty(value = "${tempColumn.columnComment.trim()}")
 #end
 	private ${tempColumn.fieldType} ${tempColumn.fieldName};
 
 #end
 
-	public ${table.className}Info(){}
+	public ${table.className}(){}
 
-#foreach( $tempColumn in $table.columnList )
-	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
-		return ${tempColumn.fieldName};
-	}
-
-	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.fieldName}) {
-		this.${tempColumn.fieldName} = ${tempColumn.fieldName};
-	}
-
-#end
+###foreach( $tempColumn in $table.columnList )
+##	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
+##		return ${tempColumn.fieldName};
+##	}
+##
+##	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.fieldName}) {
+##		this.${tempColumn.fieldName} = ${tempColumn.fieldName};
+##	}
+##
+###end
 }

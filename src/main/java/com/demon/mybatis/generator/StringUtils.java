@@ -93,7 +93,7 @@ public class StringUtils {
         switch (databaseType) {
             case Types.DECIMAL:
             case Types.REAL:
-                colType = "Double";
+                colType = "BigDecimal";
                 break;
             case Types.BIGINT:
                 colType = "Long";

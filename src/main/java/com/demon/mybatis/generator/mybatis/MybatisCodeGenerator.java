@@ -77,24 +77,24 @@ public class MybatisCodeGenerator {
                 map.put("table", table);
                 map.put("author", author);
 
+//                TemplateOption.generatorCode(
+//                        "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
+//                        table.getClassName() + "HttpApi.java");
+//                TemplateOption.generatorCode(
+//                        "api.vm", map, sourcePath + table.getPackagePath() + "/api",
+//                        table.getClassName() + "Api.java");
+//	            TemplateOption.generatorCode(
+//			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
+//			            table.getClassName() + "ApiImpl.java");
+//	            TemplateOption.generatorCode(
+//			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
+//			            table.getClassName() + "Dao.java");
+//	            TemplateOption.generatorCode(
+//			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
+//			            table.getClassName() + "DaoImpl.java");
                 TemplateOption.generatorCode(
-                        "api.vm", map, sourcePath + table.getPackagePath() + "/api",
-                        table.getClassName() + "Api.java");
-	            TemplateOption.generatorCode(
-			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
-			            table.getClassName() + "ApiImpl.java");
-	            TemplateOption.generatorCode(
-			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
-			            table.getClassName() + "Dao.java");
-	            TemplateOption.generatorCode(
-			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
-			            table.getClassName() + "DaoImpl.java");
-	            TemplateOption.generatorCode(
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
-			            table.getClassName() + "Info.java");
-	            TemplateOption.generatorCode(
-			            "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
-			            table.getClassName() + "HttpApi.java");
+			            table.getClassName() + ".java");
 	            TemplateOption.generatorCode(
 			            "mapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",
 			            table.getClassName() + "Mapper.java");
