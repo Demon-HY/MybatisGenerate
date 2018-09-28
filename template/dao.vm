@@ -1,6 +1,8 @@
-package com.control.situation.dao;
+package ${table.packageName}.service;
 
-import com.control.situation.entity.${table.className}Info;
+import com.github.pagehelper.Page;
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
 
 import java.util.List;
 
@@ -10,17 +12,15 @@ import java.util.List;
  * @author ${author}
  * @since 1.0
  */
-public interface ${table.className}Dao {
+public interface ${table.className}Service {
 
-	${table.className}Info findOne(Long id);
+	${table.className} getById(Long id);
 
-	List<${table.className}Info> findAll();
-
-    List<${table.className}Info> findByParams(${table.className}Info ${table.classNameFirstLower});
+    Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize);
 
     int delete(Long id);
 
-    int insert(${table.className}Info ${table.classNameFirstLower});
+    int insert(${table.className} ${table.classNameFirstLower});
 
-    int update(${table.className}Info ${table.classNameFirstLower});
+    int update(${table.className} ${table.classNameFirstLower});
 }

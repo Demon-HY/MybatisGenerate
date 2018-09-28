@@ -19,9 +19,15 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @ApiModel("${table.className} 实体类")
-public class ${table.className} implements Serializable {
+public class ${table.className}QueryDto implements Serializable {
 
 	private static final long serialVersionUID = -1L;
+
+    @ApiModelProperty(value = "开始创建时间")
+    private String beginCTime;
+
+    @ApiModelProperty(value = "结束创建时间")
+    private String endCTime;
 
 #foreach( $tempColumn in $table.columnList)
 #if(${tempColumn.columnComment.trim()} != '')
@@ -30,4 +36,5 @@ public class ${table.className} implements Serializable {
 	private ${tempColumn.fieldType} ${tempColumn.fieldName};
 
 #end
+
 }

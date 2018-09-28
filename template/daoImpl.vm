@@ -1,33 +1,31 @@
-package com.control.situation.dao.impl;
+package ${table.packageName}.service.impl;
 
-import com.control.situation.dao.${table.className}Dao;
-import com.control.situation.entity.${table.className}Info;
-import com.control.situation.mapper.${table.className}Mapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.mappers.${table.className}Mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class ${table.className}DaoImpl implements ${table.className}Dao {
+public class ${table.className}ServiceImpl implements ${table.className}Service {
 
 	@Autowired
 	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
 
 	@Override
-	public ${table.className}Info findOne(Long id) {
-		return ${table.classNameFirstLower}Mapper.findOne(id);
+	public ${table.className} getById(Long id) {
+		return ${table.classNameFirstLower}Mapper.getById(id);
 	}
 
-	@Override
-	public List<${table.className}Info> findAll() {
-	    return ${table.classNameFirstLower}Mapper.findAll();
-    }
-
     @Override
-    public List<${table.className}Info> findByParams(${table.className}Info ${table.classNameFirstLower}) {
-		return ${table.classNameFirstLower}Mapper.findByParams(${table.classNameFirstLower});
+    public Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize) {
+		PageHelper.orderBy("create_time desc");
+		PageHelper.startPage(pageNo, pageSize, true);
+		return ${table.classNameFirstLower}Mapper.list(queryDto);
 	}
 
 	@Override
@@ -36,12 +34,12 @@ public class ${table.className}DaoImpl implements ${table.className}Dao {
 	}
 
 	@Override
-	public int insert(${table.className}Info ${table.classNameFirstLower}) {
+	public int insert(${table.className} ${table.classNameFirstLower}) {
 		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
 	}
 
 	@Override
-	public int update(${table.className}Info ${table.classNameFirstLower}) {
+	public int update(${table.className} ${table.classNameFirstLower}) {
 		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
 	}
 }

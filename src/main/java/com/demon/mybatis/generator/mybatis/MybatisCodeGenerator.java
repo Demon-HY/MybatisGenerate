@@ -86,15 +86,18 @@ public class MybatisCodeGenerator {
 //	            TemplateOption.generatorCode(
 //			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
 //			            table.getClassName() + "ApiImpl.java");
-//	            TemplateOption.generatorCode(
-//			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
-//			            table.getClassName() + "Dao.java");
-//	            TemplateOption.generatorCode(
-//			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
-//			            table.getClassName() + "DaoImpl.java");
+	            TemplateOption.generatorCode(
+			            "dao.vm", map, sourcePath + table.getPackagePath() + "/service",
+			            table.getClassName() + "Service.java");
+	            TemplateOption.generatorCode(
+			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/service/impl",
+			            table.getClassName() + "ServiceImpl.java");
                 TemplateOption.generatorCode(
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
 			            table.getClassName() + ".java");
+                TemplateOption.generatorCode(
+                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/entity",
+                        table.getClassName() + "QueryDto.java");
 	            TemplateOption.generatorCode(
 			            "mapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",
 			            table.getClassName() + "Mapper.java");

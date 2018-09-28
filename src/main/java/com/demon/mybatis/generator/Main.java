@@ -11,7 +11,16 @@ public class Main {
     public static void main(String[] args) {
         // 生成 mybatis
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
-
+        mybatisCode.generator(
+                "com.mysql.jdbc.Driver",
+                "jdbc:mysql://rm-xxx.mysql.rds.aliyuncs.com:3306/xxx?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
+                "xxx",
+                "xxx",
+                "",
+                "Demon-HY",
+                "",
+                "e:/code/generator_180928"
+        );
 
 //        // 生成 jdbc
 //        // 设置模本路径

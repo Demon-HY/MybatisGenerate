@@ -149,7 +149,7 @@ public class StringUtils {
             case Types.TIMESTAMP:
                 return "TIMESTAMP";
             case Types.BIT:
-                return "BIT";
+                return "INTEGER";
             default:
                 System.out.println("找不到数据类型："+databaseType);
                 return "VARCHAR";

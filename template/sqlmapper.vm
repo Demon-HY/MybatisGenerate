@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${table.packageName}.mapper.${table.className}Mapper">
-    <resultMap id="${table.className}ResultMap" type="${table.packageName}.model.entity.${table.className}">
+<mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
+    <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
 #foreach($tempColumn in $table.columnList)
 	#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
 
@@ -17,26 +17,34 @@
 
     </sql>
 
-    <select id="findOne" parameterType="java.lang.Long" resultMap="${table.className}ResultMap">
+    <select id="getById" parameterType="java.lang.Long" resultMap="ResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.tableName}
         WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </select>
 
-    <select id="findByParams" resultMap="${table.className}ResultMap" parameterType="${table.packageName}.model.entity.${table.className}">
+    <sql id="dynamicWhereQuery">
+        <where>
+            <if test="@Ognl@isNotEmpty(query.beginCTime)" >
+                and create_time &gt;= #{query.beginCTime,jdbcType=VARCHAR}
+            </if>
+            <if test="@Ognl@isNotEmpty(query.endCTime)" >
+                and create_time &lt;= #{query.endCTime,jdbcType=VARCHAR}
+            </if>
+        #foreach($tempColumn in $table.columnList)
+            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})" >
+                and ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}
+            </if>
+        #end
+        </where>
+    </sql>
+
+    <select id="list" resultMap="ResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.tableName}
-        <where>
-		#foreach($tempColumn in $table.columnList)
-
-            <if test="${tempColumn.fieldName} != null" >
-				and ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}
-            </if>
-		#end
-
-        </where>
+        <include refid="dynamicWhereQuery" />
     </select>
 
     <delete id="delete" parameterType="java.lang.Long">
@@ -55,7 +63,7 @@
 			#foreach($tempColumn in $table.columnList)
 			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="${tempColumn.fieldName} != null">
+            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
 		    ${tempColumn.columnName},
             </if>
 			    #end
@@ -66,7 +74,7 @@
 	        #foreach($tempColumn in $table.columnList)
 		        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="${tempColumn.fieldName} != null">
+            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
                 #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
             </if>
 		        #end
@@ -81,7 +89,7 @@
 	#foreach($tempColumn in $table.columnList)
 		#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="${tempColumn.fieldName} != null">
+            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
 				${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
             </if>
 		#end

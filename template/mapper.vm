@@ -1,18 +1,19 @@
 package ${table.packageName}.mapper;
 
+import com.github.pagehelper.Page;
+import ${table.packageName}.model.query.${table.className}QueryDto;
 import ${table.packageName}.model.entity.${table.className};
-
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ${table.className}Mapper {
 
-	${table.className} findOne(Long id);
+	${table.className} getById(Long id);
 
-	List<${table.className}> findByParams(${table.className} ${table.classNameFirstLower});
+	Page<${table.className}> list(@Param("query") ${table.className}QueryDto queryDto);
 
 	int delete(Long id);
 
 	int insert(${table.className} ${table.classNameFirstLower});
 
-	int update(${table.className} record);
+	int update(${table.className} ${table.classNameFirstLower});
 }
