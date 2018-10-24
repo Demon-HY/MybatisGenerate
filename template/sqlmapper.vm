@@ -26,14 +26,14 @@
 
     <sql id="dynamicWhereQuery">
         <where>
-            <if test="@Ognl@isNotEmpty(query.beginCTime)" >
-                and create_time &gt;= #{query.beginCTime,jdbcType=VARCHAR}
+            <if test="@Ognl@isNotEmpty(beginCTime)" >
+                and create_time &gt;= #{beginCTime,jdbcType=VARCHAR}
             </if>
-            <if test="@Ognl@isNotEmpty(query.endCTime)" >
-                and create_time &lt;= #{query.endCTime,jdbcType=VARCHAR}
+            <if test="@Ognl@isNotEmpty(endCTime)" >
+                and create_time &lt;= #{endCTime,jdbcType=VARCHAR}
             </if>
         #foreach($tempColumn in $table.columnList)
-            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})" >
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})" >
                 and ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}
             </if>
         #end
@@ -63,7 +63,7 @@
 			#foreach($tempColumn in $table.columnList)
 			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
 		    ${tempColumn.columnName},
             </if>
 			    #end
@@ -74,7 +74,7 @@
 	        #foreach($tempColumn in $table.columnList)
 		        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
                 #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
             </if>
 		        #end
@@ -89,7 +89,7 @@
 	#foreach($tempColumn in $table.columnList)
 		#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(query.${tempColumn.fieldName})">
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
 				${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
             </if>
 		#end

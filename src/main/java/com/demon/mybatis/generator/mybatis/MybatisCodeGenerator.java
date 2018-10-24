@@ -96,7 +96,7 @@ public class MybatisCodeGenerator {
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
 			            table.getClassName() + ".java");
                 TemplateOption.generatorCode(
-                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/entity",
+                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/query",
                         table.getClassName() + "QueryDto.java");
 	            TemplateOption.generatorCode(
 			            "mapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",

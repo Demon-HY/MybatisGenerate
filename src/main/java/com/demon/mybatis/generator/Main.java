@@ -1,6 +1,5 @@
 package com.demon.mybatis.generator;
 
-import com.demon.mybatis.generator.jdbc.JdbcCodeGenerator;
 import com.demon.mybatis.generator.mybatis.MybatisCodeGenerator;
 
 /**
@@ -13,13 +12,13 @@ public class Main {
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
         mybatisCode.generator(
                 "com.mysql.jdbc.Driver",
-                "jdbc:mysql://rm-xxx.mysql.rds.aliyuncs.com:3306/xxx?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
-                "xxx",
-                "xxx",
+                "jdbc:mysql://rm-wz93c8s9fo.mysql.rds.aliyuncs.com:3306/xubei?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
                 "",
+                "",
+                "com.xubei.order",
                 "Demon-HY",
                 "",
-                "e:/code/generator_180928"
+                "e:/code/generator_181016"
         );
 
 //        // 生成 jdbc

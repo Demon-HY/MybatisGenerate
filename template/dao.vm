@@ -16,9 +16,7 @@ public interface ${table.className}Service {
 
 	${table.className} getById(Long id);
 
-    Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize);
-
-    int delete(Long id);
+    Pager<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize);
 
     int insert(${table.className} ${table.classNameFirstLower});
 

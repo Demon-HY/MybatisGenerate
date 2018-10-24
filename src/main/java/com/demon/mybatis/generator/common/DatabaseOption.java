@@ -7,6 +7,7 @@ import com.demon.mybatis.generator.model.Table;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 数据库信息获得操作类
@@ -39,11 +40,17 @@ public class DatabaseOption {
     }
 
     public Connection getConnectionByJDBC() {
+        Properties props =new Properties();
         try {
             // 装载驱动包类
             Class.forName(classDriver);
+
+            props.setProperty("user", username);
+            props.setProperty("password", password);
+            props.setProperty("remarks", "true"); //设置可以获取remarks信息
+            props.setProperty("useInformationSchema", "true");//设置可以获取tables remarks信息
             // 加载驱动
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(url, props);
         } catch (ClassNotFoundException e) {
             System.out.println("装载驱动包出现异常!请查正！");
             e.printStackTrace();
