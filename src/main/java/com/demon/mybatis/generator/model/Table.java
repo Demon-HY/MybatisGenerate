@@ -29,6 +29,23 @@ public class Table {
     private String classNameFirstLower;
     // 主键字段名
     private String primaryFieldName;
+    private String moduleName;
+
+    public String getPrimaryFieldName() {
+        return primaryFieldName;
+    }
+
+    public void setPrimaryFieldName(String primaryFieldName) {
+        this.primaryFieldName = primaryFieldName;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
     /**
      * 获得第一个主键

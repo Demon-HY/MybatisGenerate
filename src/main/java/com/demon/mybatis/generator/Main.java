@@ -10,16 +10,7 @@ public class Main {
     public static void main(String[] args) {
         // 生成 mybatis
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
-        mybatisCode.generator(
-                "com.mysql.jdbc.Driver",
-                "jdbc:mysql://rm-wz93c8s9fo.mysql.rds.aliyuncs.com:3306/xubei?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
-                "",
-                "",
-                "com.xubei.order",
-                "Demon-HY",
-                "",
-                "e:/code/generator_181016"
-        );
+
 
 //        // 生成 jdbc
 //        // 设置模本路径

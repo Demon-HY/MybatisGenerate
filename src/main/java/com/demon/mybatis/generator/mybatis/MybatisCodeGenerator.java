@@ -1,17 +1,17 @@
 package com.demon.mybatis.generator.mybatis;
 
+import com.demon.mybatis.generator.TemplateOption;
+import com.demon.mybatis.generator.common.DatabaseOption;
+import com.demon.mybatis.generator.model.Database;
+import com.demon.mybatis.generator.model.Table;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.demon.mybatis.generator.TemplateOption;
-import com.demon.mybatis.generator.common.DatabaseOption;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import com.demon.mybatis.generator.model.Database;
-import com.demon.mybatis.generator.model.Table;
 
 /**
  * 代码生成类
@@ -25,19 +25,19 @@ public class MybatisCodeGenerator {
 
     /**
      * 从页面获取到的参数
-     * @param classDriver 数据库版本
-     * @param url 数据库地址
-     * @param username 数据库用户名
-     * @param password 数据库密码
+     *
+     * @param classDriver  数据库版本
+     * @param url          数据库地址
+     * @param username     数据库用户名
+     * @param password     数据库密码
      * @param classPackage 要生成的文件的包名前缀
-     * @param author 作者
-     * @param tableNames 指定要生成的数据库表名，不指定则会生成所有表
-     * @param codePath 代码保存路径
+     * @param author       作者
+     * @param tableNames   指定要生成的数据库表名，不指定则会生成所有表
+     * @param codePath     代码保存路径
      * @return
      */
-    public boolean generator(final String classDriver, final  String url, final String username, final String password,
+    public boolean generator(final String classDriver, final String url, final String username, final String password,
                              final String classPackage, final String author, final String tableNames, final String codePath) {
-
         String sourcePath = codePath + File.separator + "src/";
         Long start = System.currentTimeMillis();
         try {
@@ -54,9 +54,9 @@ public class MybatisCodeGenerator {
             // 要生成的表名
             List<String> tableNameList = null;
 
-            if(StringUtils.isNotBlank(tableNames)) {
+            if (StringUtils.isNotBlank(tableNames)) {
                 String[] tablesArr = tableNames.split(",");
-                if(tablesArr.length>0){
+                if (tablesArr.length > 0) {
                     tableNameList = Arrays.asList(tablesArr);
                 }
             }
@@ -65,11 +65,24 @@ public class MybatisCodeGenerator {
              */
             for (Table table : tableList) {
                 //只需要手动设置的表
-                if(tableNameList != null){
-                    if(!tableNameList.contains(table.getTableName())){
+                if (tableNameList != null) {
+                    if (!tableNameList.contains(table.getTableName())) {
                         continue;
                     }
                 }
+                String[] _tableNames = table.getTableName().split("-");
+                String moduleName;
+                if (_tableNames.length == 1) {
+                    moduleName = _tableNames[0];
+                } else if (_tableNames.length == 2){
+                    moduleName = _tableNames[0] + _tableNames[1];
+                } else if (_tableNames.length == 3) {
+                    moduleName = _tableNames[1] + _tableNames[2];
+                } else {
+                    moduleName = _tableNames[1] + _tableNames[2];
+                }
+
+                table.setModuleName(moduleName);
 
                 table.setPackageName(classPackage);
 
@@ -80,30 +93,30 @@ public class MybatisCodeGenerator {
 //                TemplateOption.generatorCode(
 //                        "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
 //                        table.getClassName() + "HttpApi.java");
-//                TemplateOption.generatorCode(
-//                        "api.vm", map, sourcePath + table.getPackagePath() + "/api",
-//                        table.getClassName() + "Api.java");
-//	            TemplateOption.generatorCode(
-//			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
-//			            table.getClassName() + "ApiImpl.java");
-	            TemplateOption.generatorCode(
-			            "dao.vm", map, sourcePath + table.getPackagePath() + "/service",
-			            table.getClassName() + "Service.java");
-	            TemplateOption.generatorCode(
-			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/service/impl",
-			            table.getClassName() + "ServiceImpl.java");
                 TemplateOption.generatorCode(
-			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
-			            table.getClassName() + ".java");
+                        "api.vm", map, sourcePath + table.getPackagePath() + "/interface/api",
+                        "I" + table.getClassName() + "Api.java");
+	            TemplateOption.generatorCode(
+			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/impl/api",
+			            table.getClassName() + "Api.java");
                 TemplateOption.generatorCode(
-                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/query",
+                        "dao.vm", map, sourcePath + table.getPackagePath() + "/impl/service",
+                        table.getClassName() + "Service.java");
+                TemplateOption.generatorCode(
+                        "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/impl/service/impl",
+                        table.getClassName() + "ServiceImpl.java");
+                TemplateOption.generatorCode(
+                        "entity.vm", map, sourcePath + table.getPackagePath() + "/interface/model/entity",
+                        table.getClassName() + ".java");
+                TemplateOption.generatorCode(
+                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/interface/model/query",
                         table.getClassName() + "QueryDto.java");
-	            TemplateOption.generatorCode(
-			            "mapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",
-			            table.getClassName() + "Mapper.java");
-	            TemplateOption.generatorCode(
-			            "sqlmapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",
-			            table.getClassName() + "Mapper.xml");
+                TemplateOption.generatorCode(
+                        "mapper.vm", map, sourcePath + table.getPackagePath() + "/impl/mappers",
+                        table.getClassName() + "Mapper.java");
+                TemplateOption.generatorCode(
+                        "sqlmapper.vm", map, sourcePath + table.getPackagePath() + "/impl/mappers",
+                        table.getClassName() + "Mapper.xml");
 
                 logger.info("生成表：" + table.getTableName() + "成功");
             }

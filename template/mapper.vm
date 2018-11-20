@@ -14,6 +14,8 @@ public interface ${table.className}Mapper {
 
 	Page<${table.className}> list(${table.className}QueryDto queryDto);
 
+	${table.className} findOne(${table.className}QueryDto queryDto);
+
 	int delete(Long id);
 
 	int insert(${table.className} record);
