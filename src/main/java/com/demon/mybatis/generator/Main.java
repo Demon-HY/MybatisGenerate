@@ -15,7 +15,7 @@ public class Main {
                 "jdbc:mysql://127.0.0.1:3306/demon_sys?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
                 "root",
                 "root",
-                "org.demon.user",
+                "org.demon.admin.module.user",
                 "Demon-HY",
                 "sys_user",
                 "e:/code/generator_181129"

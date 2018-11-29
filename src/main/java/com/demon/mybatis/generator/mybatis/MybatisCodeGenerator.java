@@ -20,8 +20,10 @@ public class MybatisCodeGenerator {
 
     private Logger logger = Logger.getLogger(MybatisCodeGenerator.class);
 
-    //是否去掉模块前面的编号
-    public static String prefix = "";
+    /**
+     * 是否去掉模块前面的编号
+     */
+    public static String prefix = "sys_";
 
     /**
      * 从页面获取到的参数
@@ -96,7 +98,7 @@ public class MybatisCodeGenerator {
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
 			            table.getClassName() + ".java");
                 TemplateOption.generatorCode(
-                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/query",
+                        "entityQuery.vm", map, sourcePath + table.getPackagePath() + "/entity",
                         table.getClassName() + "QueryDto.java");
 	            TemplateOption.generatorCode(
 			            "mapper.vm", map, sourcePath + table.getPackagePath() + "/mapper",
