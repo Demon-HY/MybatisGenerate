@@ -13,30 +13,25 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		#foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
-
+		#foreach( $tempColumn in $table.columnList)`${tempColumn.columnName}`#if($velocityCount!=$table.columnList.size()),#end#end
     </sql>
 
     <select id="getById" parameterType="java.lang.Long" resultMap="ResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.tableName}
-        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
+        WHERE `${table.getFirstPrimaryKey().columnName}` = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </select>
 
     <sql id="dynamicWhereQuery">
         <where>
-            <if test="@Ognl@isNotEmpty(beginCTime)" >
-                and create_time &gt;= #{beginCTime,jdbcType=VARCHAR}
-            </if>
-            <if test="@Ognl@isNotEmpty(endCTime)" >
-                and create_time &lt;= #{endCTime,jdbcType=VARCHAR}
-            </if>
+            <if test="@Ognl@isNotEmpty(beginCTime)" > and `create_time` &gt;= #{beginCTime,jdbcType=VARCHAR}</if>
+            <if test="@Ognl@isNotEmpty(endCTime)" > and `create_time` &lt;= #{endCTime,jdbcType=VARCHAR}</if>
         #foreach($tempColumn in $table.columnList)
-            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})" >
-                and ${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}
-            </if>
+
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> and `${tempColumn.columnName}` = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}</if>
         #end
+
         </where>
     </sql>
 
@@ -47,9 +42,17 @@
         <include refid="dynamicWhereQuery" />
     </select>
 
+    <select id="findOne" resultMap="ResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${table.tableName}
+        <include refid="dynamicWhereQuery" />
+        limit 1
+    </select>
+
     <delete id="delete" parameterType="java.lang.Long">
         DELETE FROM ${table.tableName}
-        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
+        WHERE `${table.getFirstPrimaryKey().columnName}` = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </delete>
 
     <insert id="insert" useGeneratedKeys="true" parameterType="${table.packageName}.model.entity.${table.className}">
@@ -63,9 +66,7 @@
 			#foreach($tempColumn in $table.columnList)
 			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
-		    ${tempColumn.columnName},
-            </if>
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}`,</if>
 			    #end
 		    #end
 
@@ -74,9 +75,7 @@
 	        #foreach($tempColumn in $table.columnList)
 		        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
-                #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
-            </if>
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
 		        #end
 	        #end
 
@@ -89,13 +88,11 @@
 	#foreach($tempColumn in $table.columnList)
 		#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
 
-            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})">
-				${tempColumn.columnName} = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},
-            </if>
+            <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}` = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
 		#end
 	#end
 
         </set>
-        WHERE ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
+        WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </update>
 </mapper>

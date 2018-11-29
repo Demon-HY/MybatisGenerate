@@ -1,50 +1,54 @@
-package com.control.situation.api.impl;
+package ${table.packageName}.api;
 
-import com.control.situation.api.${table.className}Api;
-import com.control.situation.config.Env;
-import com.control.situation.dao.${table.className}Dao;
-import com.control.situation.utils.ClientResult;
+import org.demon.framework.common.entity.ClientResult;
+import org.demon.framework.common.entity.Pager;
+import org.demon.framework.common.retCode.BaseRetCode;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.service.${table.className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.apache.log4j.Logger;
-
-/**
- * 业务逻辑处理类
- *
- * @author ${author}
- * @since 1.0
- */
-@Service
-public class ${table.className}ApiImpl implements ${table.className}Api {
-
-	private Logger logger = Logger.getLogger(${table.className}ApiImpl.class);
+@RestController
+public class ${table.className}Api implements I${table.className}Api {
 
 	@Autowired
-	private ${table.className}Dao ${table.classNameFirstLower}Dao;
+	private ${table.className}Service ${table.classNameFirstLower}Service;
+	
+	@Override
+	public ClientResult<${table.className}> getById(@RequestParam("id") Long id) {
+		if (id <= 0) {
+			return ClientResult.error(BaseRetCode.ERR_BAD_PARAMS);
+		}
+	
+		return ClientResult.success(${table.classNameFirstLower}Service.getById(id));
+	}
+
+    @Override
+    public ClientResult<${table.className}> findOne(${table.className}QueryDto queryDto) {
+        return ClientResult.success(${table.classNameFirstLower}Service.findOne(queryDto));
+    }
 
 	@Override
-	public ClientResult findList(Env env) {
-	return null;
+	public ClientResult<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
+										                @RequestParam("pageNo") Integer pageNo,
+										   				@RequestParam("pageSize") Integer pageSize) {
+		pageNo = pageNo < 1 ? 1 : pageNo;
+		pageSize = pageSize > 200 ? 200 : pageSize;
+		return ClientResult.success(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
 	}
 
 	@Override
-	public ClientResult update(Env env) {
-	return null;
+	public ClientResult<${table.className}> insert(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+		${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
+		return ClientResult.success(${table.classNameFirstLower});
 	}
 
 	@Override
-	public ClientResult delete(Env env) {
-	return null;
-	}
-
-	@Override
-	public ClientResult save(Env env) {
-	return null;
-	}
-
-	@Override
-	public ClientResult findDetail(Env env) {
-	return null;
+	public ClientResult<${table.className}> update(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+		return ClientResult.success(${table.classNameFirstLower});
 	}
 }
