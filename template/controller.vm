@@ -1,0 +1,65 @@
+package ${table.packageName}.controller;
+
+import com.github.pagehelper.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.demon.framework.common.annotation.PostJsonMapping;
+import org.demon.framework.common.entity.ClientResult;
+import ${table.packageName}.entity.${table.className};
+import ${table.packageName}.entity.${table.className}QueryDto;
+import ${table.packageName}.service.${table.className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Api(description = "${table.tableComment} 访问接口")
+@Controller
+public class ${table.className}Controller {
+
+	@Autowired
+	private ${table.className}Service ${table.classNameFirstLower}Service;
+
+	@ApiOperation(value = "通过主键获取")
+	@ResponseBody
+	@GetMapping(value = "${table.moduleName}/get/by/${table.primaryFirstLower}")
+	public ClientResult<${table.className}> getByPrimary(@RequestParam("${table.primaryFirstLower}") Long ${table.primaryFirstLower}) {
+		return ClientResult.success(${table.classNameFirstLower}Service.getByPrimary(${table.primaryFirstLower}));
+	}
+
+	@ApiOperation(value = "查询单个 ${table.tableComment}")
+    @ResponseBody
+	@PostJsonMapping(value = "${table.moduleName}/find/one")
+    public ClientResult<${table.className}> findOne(${table.className}QueryDto queryDto) {
+        return ClientResult.success(${table.classNameFirstLower}Service.findOne(queryDto));
+    }
+
+	@ApiOperation(value = "${table.tableComment} 分页查询")
+	@ResponseBody
+	@PostJsonMapping(value = "${table.moduleName}/get/list")
+	public ClientResult<Page<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
+										                @RequestParam("pageNo") Integer pageNo,
+										   				@RequestParam("pageSize") Integer pageSize) {
+		pageNo = pageNo < 1 ? 1 : pageNo;
+		pageSize = pageSize > 100 ? 100 : pageSize;
+		return ClientResult.success(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
+	}
+
+	@ApiOperation(value = "${table.tableComment} 插入")
+	@ResponseBody
+	@PostJsonMapping(value = "${table.moduleName}/insert")
+	public ClientResult<${table.className}> insert(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+	${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
+		return ClientResult.success(${table.classNameFirstLower});
+	}
+
+	@ApiOperation(value = "${table.tableComment} 更新")
+	@ResponseBody
+	@PostJsonMapping(value = "${table.moduleName}/update")
+	public ClientResult<${table.className}> update(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+		return ClientResult.success(${table.classNameFirstLower});
+	}
+}

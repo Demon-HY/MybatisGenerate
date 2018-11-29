@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
-    <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
+    <resultMap id="ResultMap" type="${table.packageName}.entity.${table.className}">
 #foreach($tempColumn in $table.columnList)
 	#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
 
@@ -16,7 +16,7 @@
 		#foreach( $tempColumn in $table.columnList)`${tempColumn.columnName}`#if($velocityCount!=$table.columnList.size()),#end#end
     </sql>
 
-    <select id="getById" parameterType="java.lang.Long" resultMap="ResultMap">
+    <select id="getByPrimary" parameterType="java.lang.Long" resultMap="ResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.tableName}
@@ -55,11 +55,7 @@
         WHERE `${table.getFirstPrimaryKey().columnName}` = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </delete>
 
-    <insert id="insert" useGeneratedKeys="true" parameterType="${table.packageName}.model.entity.${table.className}">
-        <selectKey resultType="java.lang.Long" keyProperty="${table.getFirstPrimaryKey().fieldName}" order="AFTER">
-            SELECT LAST_INSERT_ID() AS ${table.getFirstPrimaryKey().fieldName}
-        </selectKey>
-
+    <insert id="insert" parameterType="${table.packageName}.entity.${table.className}">
         INSERT INTO
 		${table.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -82,7 +78,7 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="${table.packageName}.model.entity.${table.className}">
+    <update id="update" parameterType="${table.packageName}.entity.${table.className}">
         UPDATE ${table.tableName}
         <set>
 	#foreach($tempColumn in $table.columnList)

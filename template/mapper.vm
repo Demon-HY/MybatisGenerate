@@ -1,16 +1,15 @@
-package ${table.packageName}.mapper;
+package ${table.packageName}.mappers;
 
 import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
 
-import ${table.packageName}.model.query.${table.className}QueryDto;
-import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.entity.${table.className};
+import ${table.packageName}.entity.${table.className}QueryDto;
 
 @Mapper
 public interface ${table.className}Mapper {
 
-	${table.className} getById(Long id);
+	${table.className} getByPrimary(Long id);
 
 	Page<${table.className}> list(${table.className}QueryDto queryDto);
 

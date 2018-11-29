@@ -79,13 +79,13 @@ public class JdbcCodeGenerator {
                         "api.vm", map, sourcePath + table.getPackagePath() + "/api",
                         "I" + table.getClassName() + "Api.java");
 	            TemplateOption.generatorCode(
-			            "apiImpl.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
+			            "controller.vm", map, sourcePath + table.getPackagePath() + "/api/impl",
 			            table.getClassName() + "Api.java");
 //	            TemplateOption.generatorCode(
 //			            "dao.vm", map, sourcePath + table.getPackagePath() + "/dao",
 //			            table.getClassName() + "Dao.java");
 	            TemplateOption.generatorCode(
-			            "daoImpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
+			            "service.vm", map, sourcePath + table.getPackagePath() + "/dao/impl",
 			            table.getClassName() + "DaoImpl.java");
 	            TemplateOption.generatorCode(
 			            "entity.vm", map, sourcePath + table.getPackagePath() + "/entity",
