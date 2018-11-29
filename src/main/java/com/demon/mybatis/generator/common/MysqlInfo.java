@@ -16,9 +16,9 @@ public class MysqlInfo {
 //			String url = "jdbc:mysql://localhost:3306/test";
 //			String user = "root";
 //			String pass = "123456";
-			String url = "jdbc:mysql://xb-test-ext-www-copy0901.mysql.rds.aliyuncs.com:3306/xubei";
-			String user = "java_www";
-			String pass = "4NOV5TiVRWXm";
+			String url = "jdbc:mysql://127.0.0.1:3306/demon";
+			String user = "";
+			String pass = "";
 
 			String s;
 			Connection con = DriverManager.getConnection(url, user, pass);
