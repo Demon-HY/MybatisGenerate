@@ -2,7 +2,7 @@ package ${table.packageName}.http;
 
 import org.apache.log4j.Logger;
 
-import com.control.situation.utils.ClientResult;
+import com.control.situation.utils.ResponseObj;
 import com.control.situation.api.${table.className}Api;
 import com.control.situation.config.Env;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,37 +26,37 @@ public class ${table.className}HttpApi {
 	private ${table.className}Api ${table.classNameFirstLower}Api;
 
 	@RequestMapping("findList")
-	public ClientResult findList(HttpServletRequest req) {
+	public ResponseObj findList(HttpServletRequest req) {
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.findList(env);
-		return clientResult;
+		ResponseObj ResponseObj = ${table.classNameFirstLower}Api.findList(env);
+		return ResponseObj;
 	}
 
 	@RequestMapping("findDetail")
-	public ClientResult findDetail(HttpServletRequest req){
+	public ResponseObj findDetail(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.findDetail(env);
-		return clientResult;
+		ResponseObj ResponseObj = ${table.classNameFirstLower}Api.findDetail(env);
+		return ResponseObj;
 	}
 
 	@RequestMapping("save")
-	public ClientResult save(HttpServletRequest req){
+	public ResponseObj save(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.save(env);
-		return clientResult;
+		ResponseObj ResponseObj = ${table.classNameFirstLower}Api.save(env);
+		return ResponseObj;
 	}
 
 	@RequestMapping("delete")
-	public ClientResult delete(HttpServletRequest req){
+	public ResponseObj delete(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.delete(env);
-		return clientResult;
+		ResponseObj ResponseObj = ${table.classNameFirstLower}Api.delete(env);
+		return ResponseObj;
 	}
 
 	@RequestMapping("update")
-	public ClientResult update(HttpServletRequest req){
+	public ResponseObj update(HttpServletRequest req){
 		Env env = (Env) req.getAttribute("env");
-		ClientResult clientResult = ${table.classNameFirstLower}Api.update(env);
-		return clientResult;
+		ResponseObj ResponseObj = ${table.classNameFirstLower}Api.update(env);
+		return ResponseObj;
 	}
 }

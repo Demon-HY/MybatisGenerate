@@ -2,7 +2,7 @@ package ${table.packageName}.service;
 
 import ${table.packageName}.model.query.${table.className}QueryDto;
 import ${table.packageName}.model.entity.${table.className};
-import org.demon.framework.common.entity.Pager;
+import com.xubei.framework.common.entity.Pager;
 
 import java.util.List;
 

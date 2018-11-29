@@ -1,8 +1,7 @@
 package ${table.packageName}.api;
 
-import org.demon.framework.common.entity.ClientResult;
-import org.demon.framework.common.entity.Pager;
-import org.demon.framework.common.retCode.BaseRetCode;
+import com.xubei.framework.common.entity.ResponseObj;
+import com.xubei.framework.common.entity.Pager;
 import ${table.packageName}.model.entity.${table.className};
 import ${table.packageName}.model.query.${table.className}QueryDto;
 import ${table.packageName}.service.${table.className}Service;
@@ -18,37 +17,33 @@ public class ${table.className}Api implements I${table.className}Api {
 	private ${table.className}Service ${table.classNameFirstLower}Service;
 	
 	@Override
-	public ClientResult<${table.className}> getById(@RequestParam("id") Long id) {
-		if (id <= 0) {
-			return ClientResult.error(BaseRetCode.ERR_BAD_PARAMS);
-		}
-	
-		return ClientResult.success(${table.classNameFirstLower}Service.getById(id));
+	public ResponseObj<${table.className}> getById(@RequestParam("id") Long id) {
+		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
 	}
 
     @Override
-    public ClientResult<${table.className}> findOne(${table.className}QueryDto queryDto) {
-        return ClientResult.success(${table.classNameFirstLower}Service.findOne(queryDto));
+    public ResponseObj<${table.className}> findOne(${table.className}QueryDto queryDto) {
+        return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.findOne(queryDto));
     }
 
 	@Override
-	public ClientResult<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
+	public ResponseObj<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
 										                @RequestParam("pageNo") Integer pageNo,
 										   				@RequestParam("pageSize") Integer pageSize) {
 		pageNo = pageNo < 1 ? 1 : pageNo;
 		pageSize = pageSize > 200 ? 200 : pageSize;
-		return ClientResult.success(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
+		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
 	}
 
 	@Override
-	public ClientResult<${table.className}> insert(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+	public ResponseObj<${table.className}> insert(@RequestBody ${table.className} ${table.classNameFirstLower}) {
 		${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
-		return ClientResult.success(${table.classNameFirstLower});
+		return ResponseObj.SUCCESS(${table.classNameFirstLower});
 	}
 
 	@Override
-	public ClientResult<${table.className}> update(@RequestBody ${table.className} ${table.classNameFirstLower}) {
+	public ResponseObj<${table.className}> update(@RequestBody ${table.className} ${table.classNameFirstLower}) {
 		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
-		return ClientResult.success(${table.classNameFirstLower});
+		return ResponseObj.SUCCESS(${table.classNameFirstLower});
 	}
 }

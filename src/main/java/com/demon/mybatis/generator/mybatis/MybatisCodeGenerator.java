@@ -70,16 +70,16 @@ public class MybatisCodeGenerator {
                         continue;
                     }
                 }
-                String[] _tableNames = table.getTableName().split("-");
+                String[] _tableNames = table.getTableName().split("_");
                 String moduleName;
                 if (_tableNames.length == 1) {
                     moduleName = _tableNames[0];
                 } else if (_tableNames.length == 2){
-                    moduleName = _tableNames[0] + _tableNames[1];
+                    moduleName = _tableNames[0] + "/" +  _tableNames[1];
                 } else if (_tableNames.length == 3) {
-                    moduleName = _tableNames[1] + _tableNames[2];
+                    moduleName = _tableNames[1] + "/" +  _tableNames[2];
                 } else {
-                    moduleName = _tableNames[1] + _tableNames[2];
+                    moduleName = _tableNames[1] + "/" +  _tableNames[2];
                 }
 
                 table.setModuleName(moduleName);

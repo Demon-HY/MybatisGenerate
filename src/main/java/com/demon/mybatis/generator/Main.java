@@ -11,21 +11,5 @@ public class Main {
         // 生成 mybatis
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
 
-
-//        // 生成 jdbc
-//        // 设置模本路径
-//        TemplateOption.templatePath = "template_jdbc";
-//        JdbcCodeGenerator jdbcCode = new JdbcCodeGenerator();
-//        jdbcCode.generator(
-//                "com.mysql.jdbc.Driver",
-//                "jdbc:mysql://127.0.0.1:3306/demon?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull",
-//                "demon",
-//                "P@ssw0rd",
-//                "org.demon",
-//                "Demon-Coffee",
-//                "",
-//                "f:/code/generator"
-//                );
-
     }
 }

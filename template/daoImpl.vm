@@ -5,17 +5,34 @@ import ${table.packageName}.service.${table.className}Service;
 import ${table.packageName}.model.entity.${table.className};
 import ${table.packageName}.model.query.${table.className}QueryDto;
 import ${table.packageName}.mappers.${table.className}Mapper;
-import org.demon.framework.common.entity.Pager;
-import org.demon.framework.util.pager.PagerUtils;
+import com.xubei.framework.common.entity.Pager;
+import com.xubei.ordersale.pager.PagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Service
 public class ${table.className}ServiceImpl implements ${table.className}Service {
 
 	@Autowired
 	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+
+	@Override
+	@Transactional
+	public int insert(${table.className} ${table.classNameFirstLower}) {
+		Date date = new Date();
+		${table.classNameFirstLower}.setCreateTime(date);
+		${table.classNameFirstLower}.setUpdateTime(date);
+		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
+	}
+
+	@Override
+	public int update(${table.className} ${table.classNameFirstLower}) {
+		${table.classNameFirstLower}.setUpdateTime(new Date());
+		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
+	}
 
 	@Override
 	public ${table.className} getById(Long id) {
@@ -33,16 +50,5 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 	@Override
 	public ${table.className} findOne(${table.className}QueryDto queryDto) {
 		return ${table.classNameFirstLower}Mapper.findOne(queryDto);
-	}
-
-	@Override
-	@Transactional
-	public int insert(${table.className} ${table.classNameFirstLower}) {
-		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
-	}
-
-	@Override
-	public int update(${table.className} ${table.classNameFirstLower}) {
-		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
 	}
 }
