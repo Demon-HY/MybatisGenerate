@@ -1,0 +1,56 @@
+package ${table.packageName}.service.impl;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import ${table.packageName}.entity.${table.className};
+import ${table.packageName}.entity.${table.className}QueryDto;
+import ${table.packageName}.mappers.${table.className}Mapper;
+import ${table.packageName}.service.${table.className}Service;
+import org.demon.framework.util.gen.SnowflakeIdWorker;
+import org.demon.framework.util.pager.PageUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class ${table.className}ServiceImpl implements ${table.className}Service {
+
+	@Autowired
+	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+
+	@Override
+	public ${table.className} getByPrimary(Long id) {
+		return ${table.classNameFirstLower}Mapper.getByPrimary(id);
+	}
+
+	@Override
+    public Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize) {
+		String orderBy = PageUtils.getPageOrderBy(queryDto.getOrderBy(), queryDto.getSort());
+		if (orderBy != null) {
+			PageHelper.orderBy(orderBy);
+		}
+		PageHelper.startPage(pageNo, pageSize, true);
+
+		return ${table.classNameFirstLower}Mapper.list(queryDto);
+	}
+
+	@Override
+	public ${table.className} findOne(${table.className}QueryDto queryDto) {
+		return ${table.classNameFirstLower}Mapper.findOne(queryDto);
+	}
+
+	@Override
+	@Transactional
+	public int insert(${table.className} ${table.classNameFirstLower}) {
+#if(!${table.getFirstPrimaryKey().isAutoIncrement})
+		${table.classNameFirstLower}.${table.getFirstPrimaryKey().fieldSetMehtod}(SnowflakeIdWorker.getId());
+#end
+
+		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
+	}
+
+	@Override
+	public int update(${table.className} ${table.classNameFirstLower}) {
+		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
+	}
+}

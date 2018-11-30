@@ -37,4 +37,10 @@ public class ${table.className}QueryDto implements Serializable {
 
 #end
 
+    @ApiModelProperty(value = "排序字段:默认不排序")
+    private String orderBy;
+
+    @ApiModelProperty(value = "排序顺序: ASC[升序]/DESC[降序,默认]))")
+    private String sort;
+
 }

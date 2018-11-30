@@ -75,11 +75,11 @@ public class MybatisCodeGenerator {
                 if (_tableNames.length == 1) {
                     moduleName = _tableNames[0];
                 } else if (_tableNames.length == 2) {
-                    moduleName = _tableNames[0] + _tableNames[1];
+                    moduleName = _tableNames[0] + "/" + _tableNames[1];
                 } else if (_tableNames.length == 3) {
-                    moduleName = _tableNames[1] + _tableNames[2];
+                    moduleName = _tableNames[1] + "/" + _tableNames[2];
                 } else if (_tableNames.length > 3) {
-                    moduleName = _tableNames[_tableNames.length - 2] + _tableNames[_tableNames.length - 1];
+                    moduleName = _tableNames[_tableNames.length - 2] + "/" + _tableNames[_tableNames.length - 1];
                 } else {
                     moduleName = table.getTableName();
                 }
@@ -96,10 +96,11 @@ public class MybatisCodeGenerator {
 
                 TemplateOption.generatorCode("controller.vm", map, basePath + "/controller", table.getClassName() + "Controller.java");
                 TemplateOption.generatorCode("service.vm", map, basePath + "/service", table.getClassName() + "Service.java");
+                TemplateOption.generatorCode("serviceImpl.vm", map, basePath + "/service/impl", table.getClassName() + "ServiceImpl.java");
                 TemplateOption.generatorCode("entity.vm", map, basePath + "/entity", table.getClassName() + ".java");
                 TemplateOption.generatorCode("entityQuery.vm", map, basePath + "/entity", table.getClassName() + "QueryDto.java");
                 TemplateOption.generatorCode("mapper.vm", map, basePath + "/mappers", table.getClassName() + "Mapper.java");
-                TemplateOption.generatorCode("sqlmapper.vm", map, basePath + "/sqlmapper", table.getClassName() + "Mapper.xml");
+                TemplateOption.generatorCode("sqlMapper.vm", map, basePath + "/sqlmapper", table.getClassName() + "Mapper.xml");
 
                 logger.info("生成表：" + table.getTableName() + "成功");
             }

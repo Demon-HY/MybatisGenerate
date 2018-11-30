@@ -1,42 +1,23 @@
 package ${table.packageName}.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import ${table.packageName}.entity.${table.className};
 import ${table.packageName}.entity.${table.className}QueryDto;
-import ${table.packageName}.mappers.${table.className}Mapper;
-import org.demon.framework.util.pager.PagerUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class ${table.className}Service {
+public interface ${table.className}Service {
 
-	@Autowired
-	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+    ${table.className} getByPrimary(Long id);
 
-	public ${table.className} getByPrimary(Long id) {
-		return ${table.classNameFirstLower}Mapper.getByPrimary(id);
-	}
+    Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize);
 
-    public Page<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize) {
-		PageHelper.orderBy("${table.getFirstPrimaryKey().fieldName} desc");
-		PageHelper.startPage(pageNo, pageSize, true);
+    /**
+     * 获取单条数据, limit 1
+     */
+    ${table.className} findOne(${table.className}QueryDto queryDto);
 
-		return ${table.classNameFirstLower}Mapper.list(queryDto);
-	}
+    @Transactional
+    int insert(${table.className} user);
 
-	public ${table.className} findOne(${table.className}QueryDto queryDto) {
-		return ${table.classNameFirstLower}Mapper.findOne(queryDto);
-	}
-
-	@Transactional
-	public int insert(${table.className} ${table.classNameFirstLower}) {
-		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
-	}
-
-	public int update(${table.className} ${table.classNameFirstLower}) {
-		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
-	}
+    int update(${table.className} user);
 }

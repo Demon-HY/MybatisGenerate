@@ -3,7 +3,7 @@ package com.demon.mybatis.generator;
 import com.demon.mybatis.generator.mybatis.MybatisCodeGenerator;
 
 /**
- * Created by Demon-Coffee on 2017/7/22 0022.
+ * Created by Demon-HY on 2017/7/22 0022.
  */
 public class Main {
 
@@ -17,8 +17,8 @@ public class Main {
                 "root",
                 "org.demon.admin.system",
                 "Demon-HY",
-                "sys_user",
-                "e:/code/generator_1129"
+                "sys_menu",
+                "e:/code/generator_1130"
         );
     }
 }

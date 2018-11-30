@@ -60,7 +60,7 @@
 		${table.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
 			#foreach($tempColumn in $table.columnList)
-			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+			    #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName} || ${table.getFirstPrimaryKey().isAutoIncrement} == false)
 
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}`,</if>
 			    #end
@@ -69,7 +69,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 	        #foreach($tempColumn in $table.columnList)
-		        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+                #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName} || ${table.getFirstPrimaryKey().isAutoIncrement} == false)
 
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
 		        #end
