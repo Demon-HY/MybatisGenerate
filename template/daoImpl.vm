@@ -2,8 +2,8 @@ package ${table.packageName}.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import ${table.packageName}.service.${table.className}Service;
-import ${table.packageName}.model.entity.${table.className};
-import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.service.model.entity.${table.className};
+import ${table.packageName}.service.model.entity.${table.className}QueryDto;
 import ${table.packageName}.mappers.${table.className}Mapper;
 import com.xubei.framework.common.entity.Pager;
 import com.xubei.ordersale.pager.PagerUtils;
@@ -35,8 +35,8 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 	}
 
 	@Override
-	public ${table.className} getById(Long id) {
-		return ${table.classNameFirstLower}Mapper.getById(id);
+	public ${table.className} getByPrimary(${table.getFirstPrimaryKey().fieldType} ${table.primaryFirstLower}) {
+		return ${table.classNameFirstLower}Mapper.getByPrimary(${table.primaryFirstLower});
 	}
 
     @Override

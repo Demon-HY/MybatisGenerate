@@ -4,13 +4,13 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
 
-import ${table.packageName}.model.query.${table.className}QueryDto;
-import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.service.model.entity.${table.className};
+import ${table.packageName}.service.model.entity.${table.className}QueryDto;
 
 @Mapper
 public interface ${table.className}Mapper {
 
-	${table.className} getById(Long id);
+	${table.className} getByPrimary(@Param("${table.primaryFirstLower}") ${table.getFirstPrimaryKey().fieldType} ${table.primaryFirstLower});
 
 	Page<${table.className}> list(${table.className}QueryDto queryDto);
 

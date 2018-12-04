@@ -29,6 +29,7 @@ public class Table {
     private String classNameFirstLower;
     // 主键字段名
     private String primaryFieldName;
+    private String primaryFirstLower;
     private String moduleName;
 
     public String getPrimaryFieldName() {
@@ -138,5 +139,31 @@ public class Table {
     }
     public void setClassNameFirstLower(String classNameFirstLower) {
         this.classNameFirstLower = classNameFirstLower;
+    }
+
+    public String getPrimaryFirstLower() {
+        this.primaryFirstLower = this.getFirstPrimaryKey().getFieldName();
+        return primaryFirstLower;
+    }
+
+    public void setPrimaryFirstLower(String primaryFirstLower) {
+        this.primaryFirstLower = primaryFirstLower;
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "tableSchem='" + tableSchem + '\'' +
+                ", tableName='" + tableName + '\'' +
+                ", tableComment='" + tableComment + '\'' +
+                ", columnList=" + columnList +
+                ", packageName='" + packageName + '\'' +
+                ", packagePath='" + packagePath + '\'' +
+                ", className='" + className + '\'' +
+                ", classNameFirstLower='" + classNameFirstLower + '\'' +
+                ", primaryFieldName='" + primaryFieldName + '\'' +
+                ", primaryFirstLower='" + primaryFirstLower + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                '}';
     }
 }

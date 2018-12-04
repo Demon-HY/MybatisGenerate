@@ -2,8 +2,8 @@ package ${table.packageName}.api;
 
 import com.xubei.framework.common.entity.ResponseObj;
 import com.xubei.framework.common.entity.Pager;
-import ${table.packageName}.model.entity.${table.className};
-import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.service.model.entity.${table.className};
+import ${table.packageName}.service.model.entity.${table.className}QueryDto;
 import ${table.packageName}.service.${table.className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +17,8 @@ public class ${table.className}Api implements I${table.className}Api {
 	private ${table.className}Service ${table.classNameFirstLower}Service;
 	
 	@Override
-	public ResponseObj<${table.className}> getById(@RequestParam("id") Long id) {
-		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
+	public ResponseObj<${table.className}> getByPrimary(@RequestParam("${table.primaryFirstLower}") ${table.getFirstPrimaryKey().fieldType} ${table.primaryFirstLower}) {
+		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getByPrimary(${table.primaryFirstLower}));
 	}
 
     @Override

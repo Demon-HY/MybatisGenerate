@@ -10,6 +10,15 @@ public class Main {
     public static void main(String[] args) {
         // 生成 mybatis
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
-
+        mybatisCode.generator(
+                "com.mysql.jdbc.Driver",
+                "jdbc:mysql://127.0.0.1:3306/xdd_user?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
+                "root",
+                "root",
+                "com.xdd.user",
+                "Demon-HY",
+                "",
+                "e:/code/generator_181204"
+        );
     }
 }
