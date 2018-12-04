@@ -160,4 +160,20 @@ public class Column {
         this.fieldSetMehtod = fieldSetMehtod;
     }
 
+    @Override
+    public String toString() {
+        return "Column{" +
+                "columnName='" + columnName + '\'' +
+                ", fieldName='" + fieldName + '\'' +
+                ", fieldType='" + fieldType + '\'' +
+                ", fieldGetMethod='" + fieldGetMethod + '\'' +
+                ", fieldSetMehtod='" + fieldSetMehtod + '\'' +
+                ", columnType=" + columnType +
+                ", columnComment='" + columnComment + '\'' +
+                ", isPrimary=" + isPrimary +
+                ", isAutoIncrement=" + isAutoIncrement +
+                ", isNullAble=" + isNullAble +
+                ", isForeignKey=" + isForeignKey +
+                '}';
+    }
 }

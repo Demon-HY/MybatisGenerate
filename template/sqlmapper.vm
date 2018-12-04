@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
+<mapper namespace="${table.packageName}.server.mappers.${table.className}Mapper">
     <resultMap id="ResultMap" type="${table.packageName}.service.model.entity.${table.className}">
 #foreach($tempColumn in $table.columnList)
 	#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
@@ -55,16 +55,22 @@
         WHERE `${table.getFirstPrimaryKey().columnName}` = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}
     </delete>
 
+
+#if(${table.getFirstPrimaryKey().isAutoIncrement()} == true)
     <insert id="insert" useGeneratedKeys="true" parameterType="${table.packageName}.service.model.entity.${table.className}">
         <selectKey resultType="java.lang.Long" keyProperty="${table.getFirstPrimaryKey().fieldName}" order="AFTER">
-            SELECT LAST_INSERT_ID() AS ${table.getFirstPrimaryKey().fieldName}
+        SELECT LAST_INSERT_ID() AS ${table.getFirstPrimaryKey().fieldName}
         </selectKey>
+#end
+#if(${table.getFirstPrimaryKey().isAutoIncrement()} == false)
+    <insert id="insert" parameterType="${table.packageName}.service.model.entity.${table.className}">
+#end
 
         INSERT INTO
 		${table.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
 			#foreach($tempColumn in $table.columnList)
-                #if(${tempColumn.isAutoIncrement} == false)
+                #if(${tempColumn.isAutoIncrement()} == false)
 
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}`,</if>
 			    #end
@@ -73,7 +79,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 	        #foreach($tempColumn in $table.columnList)
-                #if(${tempColumn.isAutoIncrement} == false)
+                #if(${tempColumn.isAutoIncrement()} == false)
 
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
 		        #end

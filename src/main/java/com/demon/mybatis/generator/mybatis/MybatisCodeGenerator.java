@@ -98,11 +98,11 @@ public class MybatisCodeGenerator {
                 TemplateOption.generatorCode("api.vm", map, path + "/interface/api", "I" + className + "Api.java");
                 TemplateOption.generatorCode("entity.vm", map, path + "/interface/model/entity", className + ".java");
                 TemplateOption.generatorCode("entityQuery.vm", map, path + "/interface/model/entity", className + "QueryDto.java");
-//                TemplateOption.generatorCode("apiImpl.vm", map, path + "/impl/api", className + "Api.java");
-//                TemplateOption.generatorCode("dao.vm", map, path + "/impl/service", className + "Service.java");
-//                TemplateOption.generatorCode("daoImpl.vm", map, path + "/impl/service/impl", className + "ServiceImpl.java");
-//                TemplateOption.generatorCode("mapper.vm", map, path + "/impl/mappers", className + "Mapper.java");
-//                TemplateOption.generatorCode("sqlmapper.vm", map, path + "/impl/mappers", className + "Mapper.xml");
+                TemplateOption.generatorCode("apiImpl.vm", map, path + "/impl/api", className + "Api.java");
+                TemplateOption.generatorCode("dao.vm", map, path + "/impl/service", className + "Service.java");
+                TemplateOption.generatorCode("daoImpl.vm", map, path + "/impl/service/impl", className + "ServiceImpl.java");
+                TemplateOption.generatorCode("mapper.vm", map, path + "/impl/mappers", className + "Mapper.java");
+                TemplateOption.generatorCode("sqlmapper.vm", map, path + "/impl/mappers", className + "Mapper.xml");
 
                 logger.info("生成表：" + table.getTableName() + "成功");
             }

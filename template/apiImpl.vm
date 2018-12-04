@@ -1,10 +1,11 @@
 package ${table.packageName}.api;
 
+import ${table.packageName}.service.api.I${table.className}Api;
 import com.xubei.framework.common.entity.ResponseObj;
 import com.xubei.framework.common.entity.Pager;
 import ${table.packageName}.service.model.entity.${table.className};
 import ${table.packageName}.service.model.entity.${table.className}QueryDto;
-import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.server.service.${table.className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;

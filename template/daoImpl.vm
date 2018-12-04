@@ -1,12 +1,12 @@
 package ${table.packageName}.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.server.service.${table.className}Service;
+import ${table.packageName}.server.utils.PagerUtils;
 import ${table.packageName}.service.model.entity.${table.className};
 import ${table.packageName}.service.model.entity.${table.className}QueryDto;
-import ${table.packageName}.mappers.${table.className}Mapper;
+import ${table.packageName}.server.mappers.${table.className}Mapper;
 import com.xubei.framework.common.entity.Pager;
-import com.xubei.ordersale.pager.PagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,14 +23,21 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 	@Transactional
 	public int insert(${table.className} ${table.classNameFirstLower}) {
 		Date date = new Date();
-		${table.classNameFirstLower}.setCreateTime(date);
-		${table.classNameFirstLower}.setUpdateTime(date);
+#foreach( $tempColumn in $table.columnList)
+#if(${tempColumn.getFieldType()} == 'Date')
+		${table.classNameFirstLower}.${tempColumn.getFieldSetMehtod()}(date);
+#end
+#end
 		return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
 	}
 
 	@Override
 	public int update(${table.className} ${table.classNameFirstLower}) {
-		${table.classNameFirstLower}.setUpdateTime(new Date());
+#foreach( $tempColumn in $table.columnList)
+#if(${tempColumn.getFieldName()} == 'updateTime')
+		${table.classNameFirstLower}.${tempColumn.getFieldSetMehtod()}(new Date());
+#end
+#end
 		return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
 	}
 
@@ -41,7 +48,7 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 
     @Override
     public Pager<${table.className}> list(${table.className}QueryDto queryDto, Integer pageNo, Integer pageSize) {
-		PageHelper.orderBy("create_time desc");
+		PageHelper.orderBy("${table.primaryFirstLower} desc");
 		PageHelper.startPage(pageNo, pageSize, true);
 
 		return PagerUtils.pageToPager(${table.classNameFirstLower}Mapper.list(queryDto), pageNo, pageSize);
