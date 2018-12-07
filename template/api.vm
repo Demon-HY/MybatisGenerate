@@ -44,8 +44,8 @@ public interface I${table.className}Api {
     @ApiOperation(value = "${table.tableComment} 分页查询")
     @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.moduleName}/get/list", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseObj<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
-                                   @RequestParam("pageNo", defaultValue = "1", required = false) Integer pageNo,
-                                   @RequestParam("pageSize", defaultValue = "10", required = false) Integer pageSize);
+                                   @RequestParam("pageNo") Integer pageNo,
+                                   @RequestParam("pageSize") Integer pageSize);
 
     /**
      * ${table.tableComment} 插入

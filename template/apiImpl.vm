@@ -28,8 +28,8 @@ public class ${table.className}Api implements I${table.className}Api {
 
 	@Override
 	public ResponseObj<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
-													   @RequestParam("pageNo", defaultValue = "1", required = false) Integer pageNo,
-										   			   @RequestParam("pageSize", defaultValue = "10", required = false) Integer pageSize) {
+													   @RequestParam("pageNo") Integer pageNo,
+										   			   @RequestParam("pageSize") Integer pageSize) {
 		pageNo = pageNo < 1 ? 1 : pageNo;
 		pageSize = pageSize > 200 ? 200 : pageSize;
 		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
