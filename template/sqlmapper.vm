@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${table.packageName}.server.mappers.${table.className}Mapper">
-    <resultMap id="ResultMap" type="${table.packageName}.service.model.entity.${table.className}">
+<mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
+    <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
 #foreach($tempColumn in $table.columnList)
 	#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
 
@@ -57,13 +57,13 @@
 
 
 #if(${table.getFirstPrimaryKey().isAutoIncrement()} == true)
-    <insert id="insert" useGeneratedKeys="true" parameterType="${table.packageName}.service.model.entity.${table.className}">
+    <insert id="insert" useGeneratedKeys="true" parameterType="${table.packageName}.model.entity.${table.className}">
         <selectKey resultType="java.lang.Long" keyProperty="${table.getFirstPrimaryKey().fieldName}" order="AFTER">
         SELECT LAST_INSERT_ID() AS ${table.getFirstPrimaryKey().fieldName}
         </selectKey>
 #end
 #if(${table.getFirstPrimaryKey().isAutoIncrement()} == false)
-    <insert id="insert" parameterType="${table.packageName}.service.model.entity.${table.className}">
+    <insert id="insert" parameterType="${table.packageName}.model.entity.${table.className}">
 #end
 
         INSERT INTO
@@ -88,7 +88,7 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="${table.packageName}.service.model.entity.${table.className}">
+    <update id="update" parameterType="${table.packageName}.model.entity.${table.className}">
         UPDATE ${table.tableName}
         <set>
 	#foreach($tempColumn in $table.columnList)

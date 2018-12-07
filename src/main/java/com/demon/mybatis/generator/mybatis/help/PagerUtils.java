@@ -1,7 +1,6 @@
 //package com.demon.mybatis.generator.mybatis.help;
 //
 //import com.github.pagehelper.Page;
-//import com.xubei.framework.common.entity.Pager;
 //
 //public class PagerUtils {
 //

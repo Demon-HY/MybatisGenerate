@@ -1,7 +1,7 @@
 package ${table.packageName}.service;
 
-import ${table.packageName}.service.model.entity.${table.className};
-import ${table.packageName}.service.model.entity.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.entity.${table.className}QueryDto;
 import com.xubei.framework.common.entity.Pager;
 
 /**

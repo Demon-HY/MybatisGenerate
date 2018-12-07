@@ -1,11 +1,12 @@
 package ${table.packageName}.service.impl;
 
+import com.xdd.common.core.utils.PagerUtils;
 import com.github.pagehelper.PageHelper;
-import ${table.packageName}.server.service.${table.className}Service;
-import ${table.packageName}.server.utils.PagerUtils;
-import ${table.packageName}.service.model.entity.${table.className};
-import ${table.packageName}.service.model.entity.${table.className}QueryDto;
-import ${table.packageName}.server.mappers.${table.className}Mapper;
+import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.utils.PagerUtils;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.entity.${table.className}QueryDto;
+import ${table.packageName}.mappers.${table.className}Mapper;
 import com.xubei.framework.common.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,8 +4,8 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
 
-import ${table.packageName}.service.model.entity.${table.className};
-import ${table.packageName}.service.model.entity.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.entity.${table.className}QueryDto;
 
 @Mapper
 public interface ${table.className}Mapper {

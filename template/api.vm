@@ -5,8 +5,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.xubei.framework.common.entity.ResponseObj;
 import com.xubei.framework.common.entity.Pager;
-import ${table.packageName}.service.model.entity.${table.className};
-import ${table.packageName}.service.model.entity.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.entity.${table.className}QueryDto;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +44,8 @@ public interface I${table.className}Api {
     @ApiOperation(value = "${table.tableComment} 分页查询")
     @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.moduleName}/get/list", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseObj<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
-                                   @RequestParam("pageNo") Integer pageNo,
-                                   @RequestParam("pageSize") Integer pageSize);
+                                   @RequestParam("pageNo", defaultValue = "1", required = false) Integer pageNo,
+                                   @RequestParam("pageSize", defaultValue = "10", required = false) Integer pageSize);
 
     /**
      * ${table.tableComment} 插入

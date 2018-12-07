@@ -1,11 +1,10 @@
 package ${table.packageName}.api;
 
-import ${table.packageName}.service.api.I${table.className}Api;
 import com.xubei.framework.common.entity.ResponseObj;
 import com.xubei.framework.common.entity.Pager;
-import ${table.packageName}.service.model.entity.${table.className};
-import ${table.packageName}.service.model.entity.${table.className}QueryDto;
-import ${table.packageName}.server.service.${table.className}Service;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.entity.${table.className}QueryDto;
+import ${table.packageName}.service.${table.className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +22,14 @@ public class ${table.className}Api implements I${table.className}Api {
 	}
 
     @Override
-    public ResponseObj<${table.className}> findOne(${table.className}QueryDto queryDto) {
+    public ResponseObj<${table.className}> findOne(@RequestBody ${table.className}QueryDto queryDto) {
         return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.findOne(queryDto));
     }
 
 	@Override
 	public ResponseObj<Pager<${table.className}>> list(@RequestBody ${table.className}QueryDto queryDto,
-										                @RequestParam("pageNo") Integer pageNo,
-										   				@RequestParam("pageSize") Integer pageSize) {
+													   @RequestParam("pageNo", defaultValue = "1", required = false) Integer pageNo,
+										   			   @RequestParam("pageSize", defaultValue = "10", required = false) Integer pageSize) {
 		pageNo = pageNo < 1 ? 1 : pageNo;
 		pageSize = pageSize > 200 ? 200 : pageSize;
 		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));

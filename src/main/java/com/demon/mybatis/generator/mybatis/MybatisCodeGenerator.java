@@ -77,9 +77,12 @@ public class MybatisCodeGenerator {
                 } else if (_tableNames.length == 2) {
                     moduleName = _tableNames[0] + "/" + _tableNames[1];
                 } else if (_tableNames.length == 3) {
-                    moduleName = _tableNames[1] + "/" + _tableNames[2];
+                    moduleName = _tableNames[0] + "/" + _tableNames[1] + "/" + _tableNames[2];
                 } else {
-                    moduleName = _tableNames[1] + "/" + _tableNames[2];
+                    moduleName = _tableNames[0] + "/" + _tableNames[1] + "/" + _tableNames[2] + "/" + _tableNames[3];
+                }
+                if (StringUtils.isNotBlank(prefix)) {
+                    moduleName = moduleName.replace(prefix.substring(0, prefix.length() -1) + "/", "");
                 }
 
                 table.setModuleName(moduleName);
@@ -90,7 +93,8 @@ public class MybatisCodeGenerator {
                 map.put("table", table);
                 map.put("author", author);
 
-                String path = sourcePath + table.getPackagePath();
+//                String path = sourcePath + table.getPackagePath();
+                String path = codePath;
                 String className = table.getClassName();
 //                TemplateOption.generatorCode(
 //                        "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
