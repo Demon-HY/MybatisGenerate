@@ -3,7 +3,6 @@ package ${table.packageName}.service.impl;
 import com.xdd.common.core.utils.PagerUtils;
 import com.github.pagehelper.PageHelper;
 import ${table.packageName}.service.${table.className}Service;
-import ${table.packageName}.utils.PagerUtils;
 import ${table.packageName}.model.entity.${table.className};
 import ${table.packageName}.model.entity.${table.className}QueryDto;
 import ${table.packageName}.mappers.${table.className}Mapper;

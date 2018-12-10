@@ -15,10 +15,10 @@ public class Main {
                 "jdbc:mysql://127.0.0.1:3306/xdd_user?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
                 "root",
                 "root",
-                "com.xdd.support.sms",
+                "com.xdd.support.config",
                 "Demon-HY",
-                "xdd_sms_log",
-                "e:/code/generator_181206_1"
+                "xdd_global_config",
+                "e:/code/generator_181210_1"
         );
     }
 }
