@@ -22,6 +22,8 @@ public class MybatisCodeGenerator {
 
     //是否去掉模块前面的编号
     public static String prefix = "xdd_";
+    // 忽略不生成模板的表前缀
+    public static String ignore_prefix = "basis";
 
     /**
      * 从页面获取到的参数
@@ -64,6 +66,11 @@ public class MybatisCodeGenerator {
              * 遍历生成代码
              */
             for (Table table : tableList) {
+                // 需要忽略的表
+                if (table.getTableName().startsWith(ignore_prefix)) {
+                    continue;
+                }
+
                 //只需要手动设置的表
                 if (tableNameList != null) {
                     if (!tableNameList.contains(table.getTableName())) {
@@ -99,8 +106,9 @@ public class MybatisCodeGenerator {
 //                TemplateOption.generatorCode(
 //                        "httpapi.vm", map, sourcePath + table.getPackagePath() + "/httpapi",
 //                        table.getClassName() + "HttpApi.java");
+
                 TemplateOption.generatorCode("api.vm", map, path + "/interface/api", "I" + className + "Api.java");
-                TemplateOption.generatorCode("entity.vm", map, path + "/interface/model/entity", className + ".java");
+//                TemplateOption.generatorCode("entity.vm", map, path + "/interface/model/entity", className + ".java");
                 TemplateOption.generatorCode("entityQuery.vm", map, path + "/interface/model/entity", className + "QueryDto.java");
                 TemplateOption.generatorCode("apiImpl.vm", map, path + "/impl/api", className + "Api.java");
                 TemplateOption.generatorCode("dao.vm", map, path + "/impl/service", className + "Service.java");

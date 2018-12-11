@@ -30,11 +30,11 @@ public class ${table.className}QueryDto implements Serializable {
     private String endCTime;
 
 #foreach( $tempColumn in $table.columnList)
-#if(${tempColumn.columnComment.trim()} != '')
+#if(${tempColumn.isQueryDto()} == true)
 	@ApiModelProperty(value = "${tempColumn.columnComment.trim()}")
-#end
-	private ${tempColumn.fieldType} ${tempColumn.fieldName};
+    private ${tempColumn.fieldType} ${tempColumn.fieldName};
 
+#end
 #end
 
 }

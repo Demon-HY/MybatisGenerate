@@ -160,6 +160,37 @@ public class Column {
         this.fieldSetMehtod = fieldSetMehtod;
     }
 
+    /**
+     * 判断是否为查询参数,需要符合以下条件:
+     * 1. Integer,Long 类型的都为查询参数
+     * 2. 注释包含#查询#
+     * 3. 主键
+     * 4. 字段名等于 phone,mobile,email,qq
+     * 5. 字段名以 status,type 结尾
+     * @return
+     */
+    public boolean isQueryDto() {
+        String fieldType = StringUtils.getFieldType(this.columnType);
+        if (fieldType.equals("Integer") || fieldType.equals("Long")) {
+            return true;
+        }
+        if (org.apache.commons.lang.StringUtils.isNotBlank(this.columnComment)
+                && this.columnComment.contains("#查询#")) {
+            return true;
+        }
+        if (this.isPrimary) {
+            return true;
+        }
+        if ("phone,mobile,email,qq".contains(this.columnName)) {
+            return true;
+        }
+        if (this.columnName.endsWith("status") || this.columnName.endsWith("type")) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Column{" +

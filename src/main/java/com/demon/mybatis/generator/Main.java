@@ -8,6 +8,7 @@ import com.demon.mybatis.generator.mybatis.MybatisCodeGenerator;
 public class Main {
 
     public static void main(String[] args) {
+
         // 生成 mybatis
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
         mybatisCode.generator(
@@ -15,10 +16,10 @@ public class Main {
                 "jdbc:mysql://127.0.0.1:3306/xdd_user?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
                 "root",
                 "root",
-                "com.xdd.support.config",
+                "com.xdd.support.msgPush",
                 "Demon-HY",
-                "xdd_global_config",
-                "e:/code/generator_181210_1"
+                "",
+                "e:/code/generator_181211"
         );
     }
 }
