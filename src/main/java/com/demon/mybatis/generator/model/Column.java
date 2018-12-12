@@ -66,6 +66,7 @@ public class Column {
 
     public void setColumnName(String columnName) {
         this.columnName = columnName;
+        this.fieldName = StringUtils.getDomainColumnName(columnName);
     }
 
     public String getColumnType() {
@@ -146,7 +147,7 @@ public class Column {
     }
 
     public String getFieldSetMehtod() {
-        if(null != this.fieldName){
+        if(null != this.fieldName) {
             this.fieldSetMehtod = StringUtils.getSetMethod(this.fieldName);
         } else {
             if(null != this.columnName){
@@ -162,6 +163,7 @@ public class Column {
 
     /**
      * 判断是否为查询参数,需要符合以下条件:
+     * 0. 跳过注释包含 #忽略# 的
      * 1. Integer,Long 类型的都为查询参数
      * 2. 注释包含#查询#
      * 3. 主键
@@ -171,11 +173,15 @@ public class Column {
      */
     public boolean isQueryDto() {
         String fieldType = StringUtils.getFieldType(this.columnType);
-        if (fieldType.equals("Integer") || fieldType.equals("Long")) {
-            return true;
+        if (org.apache.commons.lang.StringUtils.isNotBlank(this.columnComment)
+                && this.columnComment.contains("#忽略#")) {
+            return false;
         }
         if (org.apache.commons.lang.StringUtils.isNotBlank(this.columnComment)
                 && this.columnComment.contains("#查询#")) {
+            return true;
+        }
+        if (fieldType.equals("Integer") || fieldType.equals("Long")) {
             return true;
         }
         if (this.isPrimary) {

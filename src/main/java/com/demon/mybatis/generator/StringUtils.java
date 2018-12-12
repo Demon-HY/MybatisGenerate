@@ -35,9 +35,10 @@ public class StringUtils {
 
         methodStr = "set";
 
-        if ((field == null) || (field == "")) {
+        if ((field == null) || (field.equals(""))) {
             return "";
         } else {
+            field = getDomainColumnName(field);
             field = methodStr + field.substring(0, 1).toUpperCase()
                     + field.substring(1);
 
@@ -56,6 +57,7 @@ public class StringUtils {
         if ((field == null) || (Objects.equals(field, ""))) {
             return "";
         } else {
+            field = getDomainColumnName(field);
             field = methodStr + field.substring(0, 1).toUpperCase() + field.substring(1);
 
             return field;
@@ -86,6 +88,7 @@ public class StringUtils {
 
         return databaseColumn;
     }
+
 
     public static String getFieldType(int databaseType) {
         String colType = "";

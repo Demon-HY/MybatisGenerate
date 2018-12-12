@@ -26,7 +26,7 @@ public class MybatisCodeGenerator {
     public static String ignore_prefix = "basis";
 
     /**
-     * 从页面获取到的参数
+     * 生成入口
      *
      * @param classDriver  数据库版本
      * @param url          数据库地址
@@ -108,7 +108,7 @@ public class MybatisCodeGenerator {
 //                        table.getClassName() + "HttpApi.java");
 
                 TemplateOption.generatorCode("api.vm", map, path + "/interface/api", "I" + className + "Api.java");
-//                TemplateOption.generatorCode("entity.vm", map, path + "/interface/model/entity", className + ".java");
+                TemplateOption.generatorCode("entity.vm", map, path + "/interface/model/entity", className + ".java");
                 TemplateOption.generatorCode("entityQuery.vm", map, path + "/interface/model/entity", className + "QueryDto.java");
                 TemplateOption.generatorCode("apiImpl.vm", map, path + "/impl/api", className + "Api.java");
                 TemplateOption.generatorCode("dao.vm", map, path + "/impl/service", className + "Service.java");

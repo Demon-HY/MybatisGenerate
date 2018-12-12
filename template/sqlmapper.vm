@@ -27,10 +27,11 @@
         <where>
             <if test="@Ognl@isNotEmpty(beginCTime)" > and `create_time` &gt;= #{beginCTime,jdbcType=VARCHAR}</if>
             <if test="@Ognl@isNotEmpty(endCTime)" > and `create_time` &lt;= #{endCTime,jdbcType=VARCHAR}</if>
-        #foreach($tempColumn in $table.columnList)
-
+#foreach($tempColumn in $table.columnList)
+#if(${tempColumn.isQueryDto()} == true)
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> and `${tempColumn.columnName}` = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}}</if>
-        #end
+#end
+#end
 
         </where>
     </sql>
@@ -69,21 +70,19 @@
         INSERT INTO
 		${table.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
-			#foreach($tempColumn in $table.columnList)
-                #if(${tempColumn.isAutoIncrement()} == false)
-
+#foreach($tempColumn in $table.columnList)
+#if(${tempColumn.isAutoIncrement()} == false)
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}`,</if>
-			    #end
-		    #end
+#end
+#end
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-	        #foreach($tempColumn in $table.columnList)
-                #if(${tempColumn.isAutoIncrement()} == false)
-
+#foreach($tempColumn in $table.columnList)
+#if(${tempColumn.isAutoIncrement()} == false)
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
-		        #end
-	        #end
+#end
+#end
 
         </trim>
     </insert>
@@ -91,12 +90,11 @@
     <update id="update" parameterType="${table.packageName}.model.entity.${table.className}">
         UPDATE ${table.tableName}
         <set>
-	#foreach($tempColumn in $table.columnList)
-		#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
-
+#foreach($tempColumn in $table.columnList)
+#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> `${tempColumn.columnName}` = #{${tempColumn.fieldName},jdbcType=${tempColumn.columnType}},</if>
-		#end
-	#end
+#end
+#end
 
         </set>
         WHERE ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName},jdbcType=${table.getFirstPrimaryKey().columnType}}

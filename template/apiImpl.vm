@@ -1,5 +1,6 @@
 package ${table.packageName}.api;
 
+import com.xdd.common.core.utils.ResponseUtils;
 import com.xubei.framework.common.entity.ResponseObj;
 import com.xubei.framework.common.entity.Pager;
 import ${table.packageName}.model.entity.${table.className};
@@ -18,12 +19,12 @@ public class ${table.className}Api implements I${table.className}Api {
 	
 	@Override
 	public ResponseObj<${table.className}> getByPrimary(@RequestParam("${table.primaryFirstLower}") ${table.getFirstPrimaryKey().fieldType} ${table.primaryFirstLower}) {
-		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getByPrimary(${table.primaryFirstLower}));
+		return ResponseUtils.SUCCESS(${table.classNameFirstLower}Service.getByPrimary(${table.primaryFirstLower}));
 	}
 
     @Override
     public ResponseObj<${table.className}> findOne(@RequestBody ${table.className}QueryDto queryDto) {
-        return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.findOne(queryDto));
+        return ResponseUtils.SUCCESS(${table.classNameFirstLower}Service.findOne(queryDto));
     }
 
 	@Override
@@ -32,18 +33,18 @@ public class ${table.className}Api implements I${table.className}Api {
 										   			   @RequestParam("pageSize") Integer pageSize) {
 		pageNo = pageNo < 1 ? 1 : pageNo;
 		pageSize = pageSize > 200 ? 200 : pageSize;
-		return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
+		return ResponseUtils.SUCCESS(${table.classNameFirstLower}Service.list(queryDto, pageNo, pageSize));
 	}
 
 	@Override
 	public ResponseObj<${table.className}> insert(@RequestBody ${table.className} ${table.classNameFirstLower}) {
 		${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
-		return ResponseObj.SUCCESS(${table.classNameFirstLower});
+		return ResponseUtils.SUCCESS(${table.classNameFirstLower});
 	}
 
 	@Override
 	public ResponseObj<${table.className}> update(@RequestBody ${table.className} ${table.classNameFirstLower}) {
 		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
-		return ResponseObj.SUCCESS(${table.classNameFirstLower});
+		return ResponseUtils.SUCCESS(${table.classNameFirstLower});
 	}
 }
